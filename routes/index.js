@@ -1,13 +1,16 @@
-const { request } = require("express");
+const { Router } = require("express");
 
-const express = require('express')
-const router = express.Router()
-const UserController = require('../controllers/userController')
+const userRouter = require("./userRouter");
+const artRouter = require("./artRouter");
+const categoryRouter = require("./categoryRouter");
 
-router.get('/', (req, res) => {
-  res.send('Aruto Server')
-})
-router.post('/register', UserController.register)
-router.post('/login', UserController.login)
+const router = Router();
 
-module.exports = router
+router.get("/", (req, res) => {
+  res.send("Aruto Server");
+});
+router.use("/", userRouter);
+router.use("/arts", artRouter);
+router.use("/categories", categoryRouter);
+
+module.exports = router;

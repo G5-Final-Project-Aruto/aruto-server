@@ -1,41 +1,48 @@
-const User = require('../models/user')
-const mongoose = require('mongoose')
-const { getToken } = require('../helpers')
+const { User } = require("../models");
+const { hashPassword, verifyPassword, getToken } = require("../helpers");
 
-class UserController {
-  static register ( req, res, next ) {
-    const newUser = new User({
-      _id: new mongoose.Types.ObjectId(),
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      art: req.body.art
-    })
-    newUser.save()
-      .then(result => {
-        res.status(201).json(result)
-      })
-      .catch(next)
-  }
-  static async login ( req, res, next ) {
+class Controller {
+  static async register(req, res, next) {
     try {
-      const user = await User.findOne({
-        email: req.body.email
-      })
-      if(user && user.password == req.body.password) {
-        let dataUser = {
-          _id: user._id,
-          email: user.email
-        }
-        const access_token = getToken(dataUser)
-        res.status(200).json({access_token: access_token})
+      const { username, email, password, full_name } = req.body;
+      const newUser = {
+        username,
+        email,
+        full_name,
+        password: hashPassword(password),
+      };
+
+      const user = await User.create(newUser);
+
+      res.status(201).json({
+        username: user.username,
+        email: user.email,
+        full_name: user.full_name,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+
+      const user = await User.findOne({ email });
+
+      if (!user || !verifyPassword(password, user.password)) {
+        throw { name: "Invalid email / password" };
       }
-    } catch (error) {
-      next(error)
-    } 
-  } 
+
+      const access_token = getToken({
+        _id: user._id,
+        email: user.email,
+      });
+      res.status(200).json({ access_token });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
-module.exports = UserController
+module.exports = Controller;
