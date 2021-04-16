@@ -1,13 +1,28 @@
-const mongoose = require('mongoose')
+const { Schema, model, ObjectId } = require("mongoose");
 
-const userSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  username: { type: String, required:true },
-  email: { type: String, required:true },
-  password: { type: String, required:true },
-  first_name: { type: String, required:true },
-  last_name: { type: String, required:true },
-  art: [String],
-})
+const userSchema = Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  full_name: {
+    type: String,
+    required: true,
+  },
+  arts: [
+    {
+      type: ObjectId,
+      ref: "Art",
+    },
+  ],
+});
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = model("User", userSchema);
