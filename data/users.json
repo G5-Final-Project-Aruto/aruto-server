@@ -1,0 +1,51 @@
+[
+  {
+    "username": "rio",
+    "email": "rio@mail.com",
+    "password": 12345,
+    "full_name": "rio dicky",
+    "art": []
+  },
+  {
+    "username": "harits",
+    "email": "harits@mail.com",
+    "password": 12345,
+    "full_name": "harits menida",
+    "art": []
+  },
+  {
+    "username": "rangga",
+    "email": "rangga@mail.com",
+    "password": 12345,
+    "full_name": "rangga syarial",
+    "art": []
+  },
+  {
+    "username": "robby",
+    "email": "robby@mail.com",
+    "password": 12345,
+    "full_name": "robby benta",
+    "art": []
+  },
+  {
+    "username": "naufal",
+    "email": "naufal@mail.com",
+    "password": 12345,
+    "full_name": "naufal",
+    "art": []
+  },
+  {
+    "username": "al",
+    "email": "al@mail.com",
+    "password": 12345,
+    "full_name": "al sikeen",
+    "art": []
+  },
+  {
+    "username": "ria",
+    "email": "ria@mail.com",
+    "password": 12345,
+    "full_name": "ria rio",
+    "art": []
+  }
+]

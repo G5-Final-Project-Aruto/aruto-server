@@ -44,8 +44,8 @@ describe('Testing POST /arts', () => {
             expect(typeof res.body._id).toEqual("string")
             expect(res.body).toHaveProperty("image_url")
             expect(typeof res.body.image_url).toEqual("string")
-            expect(res.body).toHaveProperty("price", product.price)
-            expect(res.body).toHaveProperty("like_count", product.like_count)
+            expect(res.body).toHaveProperty("price", art.price)
+            expect(res.body).toHaveProperty("like_count", art.like_count)
             done()
           }
         })

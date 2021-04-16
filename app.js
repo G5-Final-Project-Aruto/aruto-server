@@ -2,22 +2,13 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const express = require("express");
-const mongoose = require("mongoose");
 const router = require("./routes");
 const { errorHandler } = require("./middlewares");
+const connectDatabase = require('./config/database')
 
 const app = express();
 
-mongoose
-  .connect(
-    "mongodb://127.0.0.1:27017/aruto_" + process.env.NODE_ENV + "_server",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
-  .then((_) => console.log("connect mongodb"))
-  .catch((err) => console.log(err));
+connectDatabase()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

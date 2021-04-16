@@ -7,8 +7,7 @@ let registerUserTest = {
   username: 'admin',
   email: 'admiin@gmail.com',
   password: 123456,
-  first_name: 'admin',
-  last_name: 'doang',
+  full_name: 'admin',
   art: []
 }
 
@@ -35,8 +34,7 @@ describe('Testing post /register', () => {
             expect(typeof res.body._id).toEqual('string')
             expect(res.body).toHaveProperty('username', registerUserTest.username)
             expect(res.body).toHaveProperty('email', registerUserTest.email)
-            expect(res.body).toHaveProperty('first_name', registerUserTest.first_name)
-            expect(res.body).toHaveProperty('last_name', registerUserTest.last_name)
+            expect(res.body).toHaveProperty('full_name', registerUserTest.full_name)
             done()
           }
         })
@@ -46,13 +44,12 @@ describe('Testing post /register', () => {
     ["username", "empty", { ...registerUserTest, username: "" }, "UserName is required"],
     ["email", "empty", { ...registerUserTest, email: "" }, "email is required"],
     ["password", "empty", { ...registerUserTest, password: "" }, "password is required"],
-    ["first_name", "empty", { ...registerUserTest, first_name: "" }, "First Name is required"],
-    ["last_name", "empty", { ...registerUserTest, last_name: "" }, "LastName is required"],
+    ["full_name", "empty", { ...registerUserTest, full_name: "" }, "Full Name is required"],
   ])( 'failed case with status code 400', (attribute, testCase, input, expected) => {
     it(`should return message '${expected}' when ${attribute} is '${testCase}'`, (done) => {
       request(app)
         .post('/register')
-        .send(registerUserTest)
+        .send(input)
         .end((err, res) => {
           if(err) {
             done(err)
