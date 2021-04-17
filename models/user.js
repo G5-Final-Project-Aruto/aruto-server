@@ -1,5 +1,7 @@
 const { Schema, model, ObjectId } = require("mongoose");
 
+const { hashPassword } = require("../helpers");
+
 const userSchema = Schema({
   username: {
     type: String,
@@ -8,6 +10,7 @@ const userSchema = Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -23,6 +26,11 @@ const userSchema = Schema({
       ref: "Art",
     },
   ],
+});
+
+userSchema.pre("save", function (next) {
+  this.password = hashPassword(this.password);
+  next();
 });
 
 module.exports = model("User", userSchema);
