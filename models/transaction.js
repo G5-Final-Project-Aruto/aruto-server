@@ -10,8 +10,17 @@ const transactionSchema = Schema({
   totalPrice: {
     type: Number
   },
-  createdAt: {
-    type: Date, default: Date.now
+  address: {
+    type: String,
+    required: true
+  },
+  status: {
+    type: String,
+    required: true
+  },
+  User :{
+    type: ObjectId,
+    ref: 'User'
   }
 });
 
