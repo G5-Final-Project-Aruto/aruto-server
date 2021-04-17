@@ -1,15 +1,16 @@
 const { User } = require("../models");
-const { hashPassword, verifyPassword, getToken } = require("../helpers");
+const { verifyPassword, getToken } = require("../helpers");
 
 class Controller {
   static async register(req, res, next) {
     try {
       const { username, email, password, full_name } = req.body;
+
       const newUser = {
         username,
         email,
         full_name,
-        password: hashPassword(password),
+        password,
       };
 
       const user = await User.create(newUser);
@@ -38,15 +39,12 @@ class Controller {
         throw { name: "Invalid email / password" };
       }
 
-      const access_token = getToken({
+      const payload = {
         _id: user._id,
         email: user.email,
-      });
-      res.status(200).json({ 
-        _id: user.id,
-        email: user.email,
-        access_token
-       });
+      };
+      const access_token = getToken(payload);
+      res.status(200).json({ ...payload, access_token });
     } catch (err) {
       next(err);
     }
