@@ -1,7 +1,8 @@
 const errorHandler = require("./errorHandler");
-const { authentic } = require('./auth')
+const { authorization, authentication } = require('./auth')
 
 module.exports = {
   errorHandler,
-  authentic,
+  authorization,
+  authentication,
 };

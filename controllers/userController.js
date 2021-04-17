@@ -15,6 +15,7 @@ class Controller {
       const user = await User.create(newUser);
 
       res.status(201).json({
+        _id: user._id,
         username: user.username,
         email: user.email,
         full_name: user.full_name,
@@ -41,7 +42,11 @@ class Controller {
         _id: user._id,
         email: user.email,
       });
-      res.status(200).json({ access_token });
+      res.status(200).json({ 
+        _id: user.id,
+        email: user.email,
+        access_token
+       });
     } catch (err) {
       next(err);
     }
