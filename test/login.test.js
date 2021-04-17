@@ -1,130 +1,89 @@
-const request = require('supertest')
+const Chai = require("chai");
+const { expect } = Chai;
+const chaiHttp = require("chai-http");
 
-const app = require('../app')
+const app = require("../app");
+const { User } = require("../models");
 
-describe('testing /login', () => {
-  describe('success login', () => {
-    it('should return status code 200', (done) => {
-      const body = {
-        email: 'admin@gmail.com',
-        password: 123456,
-      }
+Chai.use(chaiHttp);
 
-      request(app)
-        .post('/login')
-        .send(body)
-        .end((err, res) => {
-          if(err){
-            done(err)
-          }else{
-            expect(res.statusCode).toEqual(200);
-            expect(typeof res.body).toEqual("object");
-            expect(res.body).toHaveProperty("access_token");
-            done()
-          }
+let registerUserTest = {
+  full_name: "admin",
+  username: "admin",
+  email: "admiin@gmail.com",
+  password: 123456,
+};
+
+describe("Post /login", () => {
+  before((done) => {
+    User.create(registerUserTest)
+      .then(() => done())
+      .catch((err) => console.log(err));
+  });
+
+  after((done) => {
+    User.deleteMany({})
+      .then(() => done())
+      .catch((err) => console.log(err));
+  });
+
+  describe("succes case", () => {
+    it("should return response with status code 200", (done) => {
+      Chai.request(app)
+        .post("/login")
+        .set("content-type", "application/x-www-form-urlencoded")
+        .send({
+          email: registerUserTest.email,
+          password: registerUserTest.password,
         })
-    })
-  })
-  describe('failed case with status code 400', () => {
-    it('should return error message when not input email or password', (done) => {
-      const body = {
-        email: '',
-        password: '',
-      }
-
-      request(app)
-        .post('/login')
-        .send(body)
         .end((err, res) => {
-          if(err){
-            done(err)
-          }else{
-            expect(res.statusCode).toEqual(400);
-            expect(typeof res.body).toEqual("object");
-            expect(res.body).toHaveProperty("message", "email or password required");
-            done()
-          }
-        })
-    })
-    it('should return error message when not input password', (done) => {
-      const body = {
-        email: 'admin@gmail.com',
-        password: '',
-      }
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("_id");
+          expect(res.body).to.have.property("email");
+          expect(res.body.email).to.equal(registerUserTest.email);
+          expect(res.body).to.have.property("access_token");
+          done();
+        });
+    });
+  });
 
-      request(app)
-        .post('/login')
-        .send(body)
-        .end((err, res) => {
-          if(err){
-            done(err)
-          }else{
-            expect(res.statusCode).toEqual(400);
-            expect(typeof res.body).toEqual("object");
-            expect(res.body).toHaveProperty("message", "email or password required");
-            done()
-          }
-        })
-    })
-    it('should return error message when not input email', (done) => {
-      const body = {
-        email: '',
-        password: 123456,
-      }
+  describe("failed case, with 400 status code", () => {
+    const tests = [
+      {
+        args: { email: registerUserTest.email, password: 12345 },
+        expected: {
+          field: "password",
+          type: "wrong",
+          message: "Invalid email / password",
+        },
+      },
+      {
+        args: { email: "admin2@mail.com", password: registerUserTest.password },
+        expected: {
+          field: "email",
+          type: "wrong",
+          message: "Invalid email / password",
+        },
+      },
+    ];
 
-      request(app)
-        .post('/login')
-        .send(body)
-        .end((err, res) => {
-          if(err){
-            done(err)
-          }else{
-            expect(res.statusCode).toEqual(400);
-            expect(typeof res.body).toEqual("object");
-            expect(res.body).toHaveProperty("message", "email or password required");
-            done()
-          }
-        })
-    })
-    it('should return error message when password wrong', (done) => {
-      const body = {
-        email: 'admin@gmail.com',
-        password: 'qwertyui',
-      }
-
-      request(app)
-        .post('/login')
-        .send(body)
-        .end((err, res) => {
-          if(err){
-            done(err)
-          }else{
-            expect(res.statusCode).toEqual(400);
-            expect(typeof res.body).toEqual("object");
-            expect(res.body).toHaveProperty("message", "email or password invalid");
-            done()
-          }
-        })
-    })
-    it('should return error message when email not found', (done) => {
-      const body = {
-        email: 'admin2@gmail.com',
-        password: 123456,
-      }
-
-      request(app)
-        .post('/login')
-        .send(body)
-        .end((err, res) => {
-          if(err){
-            done(err)
-          }else{
-            expect(res.statusCode).toEqual(400);
-            expect(typeof res.body).toEqual("object");
-            expect(res.body).toHaveProperty("message", "email or password invalid");
-            done()
-          }
-        })
-    })
-  })
-})
+    tests.forEach(({ args, expected }) => {
+      it(`should return error when ${expected.field} is ${expected.type}`, function (done) {
+        Chai.request(app)
+          .post("/login")
+          .set("content-type", "application/x-www-form-urlencoded")
+          .send(args)
+          .end((err, res) => {
+            expect(err).to.be.null;
+            expect(res).to.have.status(400);
+            expect(res.body).to.be.an("object");
+            expect(res.body).to.have.property("message");
+            expect(res.body.message).to.equal(expected.message);
+            done();
+          });
+      });
+    });
+  });
+});
