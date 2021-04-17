@@ -4,6 +4,7 @@
   "description": "Server for  Aruto Apps",
   "main": "app.js",
   "scripts": {
+    "seed": "cross-env NODE_ENV=development node seed",
     "test": "cross-env NODE_ENV=test npx mocha --exit",
     "dev": "cross-env NODE_ENV=development npx nodemon bin/http.js"
   },
