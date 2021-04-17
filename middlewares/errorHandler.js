@@ -16,6 +16,21 @@ module.exports = (err, req, res, next) => {
         message: err.name,
       };
       break;
+    case "ValidationError":
+      error = {
+        ...error,
+        status: 400,
+        message: err.message,
+      };
+      break;
+    case "MongoError":
+      const attribute = Object.keys(err.keyValue)[0];
+      error = {
+        ...error,
+        status: 400,
+        message: `${attribute} is unique`,
+      };
+      break;
     default:
       break;
   }
