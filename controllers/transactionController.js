@@ -12,20 +12,27 @@ let snap = new midtransClient.Snap({
   clientKey : clientKey
 });
 
+let transactionToken;
+
 class TransactionController {
   static async transactionCreate (req,res,next) {
     try {
       console.log(req.currentUser, 'INI CURRENT USER')
       console.log(req.body, 'INI TEST ')
       const input = {
-        transaction_details:{
-          arts: req.body.arts,
-          address: req.body.address,
+        transaction_details:{    
           order_id: uuidv4(),
-          gross_amount: req.body.gross_amount,
+          gross_amount: +req.body.gross_amount, 
+          address: req.body.address 
+        },
+        
+      }
+      const data = {
+          arts: req.body.arts,
+          gross_amount: +req.body.gross_amount,
+          address: req.body.address,
           status:"pending",
-          userId: req.currentUser
-        }
+          UserId: req.currentUser._id
       }
       // const transaction = await Transaction.create(input);
       let snap = new midtransClient.Snap({
@@ -36,12 +43,15 @@ class TransactionController {
       });
       
       const Token = snap.createTransaction(input)
-      .then((transaction)=>{
+      .then (transaction => {
         console.log(input)
         // transaction token
-        let transactionToken = transaction;
+        transactionToken = transaction;
         console.log('transactionToken:',transactionToken);
-        res.status(201).json(transactionToken)
+        return  Transaction.create(data)
+      })
+      .then( result => {   
+        res.status(201).json({transactionToken,result})
         })
       .catch( err => {
           console.log({error: err})
