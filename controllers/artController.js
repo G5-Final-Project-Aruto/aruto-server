@@ -1,9 +1,10 @@
-const { Art } = require("../models");
+const { Art, User } = require("../models");
 const { uploadImage, deleteImage } = require("../helpers");
 
 class Controller {
   static async createArt(req, res, next) {
-    let image_url = "";
+    let image_url = "",
+      artId = "";
     try {
       const data = await uploadImage(req);
       image_url = data.image_url;
@@ -13,10 +14,16 @@ class Controller {
         categories: data.categories.split(",").map((cat) => cat.trim()),
         user: req.currentUser._id,
       });
+      artId = art._id;
+
+      const user = await User.findOne({ _id: req.currentUser._id });
+      user.arts.push(artId);
+      await user.save();
 
       res.status(201).json(art);
     } catch (error) {
-      deleteImage(image_url);
+      if (artId !== "") await Art.deleteOne({ _id: artId });
+      if (image_url !== "") await deleteImage(image_url);
       next(error);
     }
   }
@@ -66,6 +73,22 @@ class Controller {
     }
   }
 
+  static async deleteArt(req, res, next) {
+    try {
+      const art = await Art.deleteOne({
+        _id: req.params.id,
+      });
+
+      if (art.deletedCount > 0) {
+        res.status(200).json({ message: "success delete art" });
+      } else {
+        throw { name: "Art not found" };
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async updateArt(req, res, next) {
     try {
       const { title, image_url, price } = req.body;
@@ -85,20 +108,6 @@ class Controller {
         }
       );
       res.status(200).json(dataArt);
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async deleteArt(req, res, next) {
-    try {
-      const art = await Art.deleteOne({
-        _id: req.params.id,
-      });
-      if (art.deletedCount > 0) {
-        res.status(200).json({ message: "success delete art" });
-      } else {
-        throw { name: "Art not found" };
-      }
     } catch (error) {
       next(error);
     }
