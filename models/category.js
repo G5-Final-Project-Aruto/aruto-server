@@ -1,16 +1,14 @@
-const { Schema, model, ObjectId } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const categorySchema = Schema({
-  name: {
+  title: {
     type: String,
     required: true,
   },
-  arts: [
-    {
-      type: ObjectId,
-      ref: "Art",
-    },
-  ],
+  image_url: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = model("Category", categorySchema);
