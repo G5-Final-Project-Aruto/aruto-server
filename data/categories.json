@@ -1,20 +1,18 @@
 [
   {
-    "name": "Canvas Art"
+    "title": "Digital Art",
+    "image_url": "https://firebasestorage.googleapis.com/v0/b/aruto-6e273.appspot.com/o/categories%2FDigital_Art.jpg?alt=media&token=3e1a4fc1-1491-4c1b-906f-55d44cc8b54f"
   },
   {
-    "name": "Frame Art"
+    "title": "Fan Art",
+    "image_url": "https://firebasestorage.googleapis.com/v0/b/aruto-6e273.appspot.com/o/categories%2FFan_Art.jpg?alt=media&token=1c78d04f-4082-40c4-940c-8a8f8ffda790"
   },
   {
-    "name": "Contemporary"
+    "title": "Fantasy",
+    "image_url": "https://firebasestorage.googleapis.com/v0/b/aruto-6e273.appspot.com/o/categories%2FFantasy.jpg?alt=media&token=7cf39730-9214-492d-b896-02aa622e291e"
   },
   {
-    "name": "Cubism"
-  },
-  {
-    "name": "Modern Art"
-  },
-  {
-    "name": "Vintage"
+    "title": "Game Art",
+    "image_url": "https://firebasestorage.googleapis.com/v0/b/aruto-6e273.appspot.com/o/categories%2FGame_Art.jpg?alt=media&token=77ffb8b6-9b6e-49e9-b213-420a07d1d175"
   }
 ]

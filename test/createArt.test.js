@@ -1,131 +1,238 @@
-const request = require('supertest')
+const Chai = require("chai");
+const { expect } = Chai;
+const chaiHttp = require("chai-http");
+const fs = require("fs");
 
-const app = require('../app')
+const app = require("../app");
+const { Art, User, Category } = require("../models");
+const { arts, users, categories } = require("./data/data");
+const { deleteImage } = require("../helpers");
 
-const { admin_token } = require('./token')
+Chai.use(chaiHttp);
 
-let art = {
-  image_url: './test/image/gambar.jpg',
-  price: 20000,
-  like_count: 0
-}
+let userData, categoriesData, image_url;
 
-describe('Testing POST /arts', () => {
-  afterAll((done) => {
-    let container = []
-    request(app)
-      .get("/arts")
-      .set("access_token", admin_token)
-      .end((err, res) => {
-        container = res.body
-      });
-    container.forEach((el) => {
-      request(app)
-        .delete(`/products/${el._id}`)
-        .set("access_token", admin_token)
-        .end(() => done())
-    })
-  })
-  describe("succes case 201", () => {
-    it("should return status code 201", (done) => {
-      request(app)
-        .post('/arts')
-        .set("access_token", admin_token)
-        .field('price', art.price)
-        .field('like_count', art.like_count)
-        .attach('fileTest', art.image_url)
-        .end((err, res) => {
-          if(err){
-            done(err)
-          }else{
-            expect(res.statusCode).toEqual(201)
-            expect(typeof res.body).toEqual("object")
-            expect(res.body).toHaveProperty("_id")
-            expect(typeof res.body._id).toEqual("string")
-            expect(res.body).toHaveProperty("image_url")
-            expect(typeof res.body.image_url).toEqual("string")
-            expect(res.body).toHaveProperty("price", art.price)
-            expect(res.body).toHaveProperty("like_count", art.like_count)
-            done()
-          }
-        })
-    })
-  })
-  describe("failed case with status code 401", () => {
-    it("should return error when not passed access_token", (done) => {
-      request(app)
-        .post("/arts")
-        .field('price', art.price)
-        .field('like_count', art.like_count)
-        .attach('fileTest', art.image_url)
-        .end((err, res) => {
-          if (err) {
-            done(err)
-          } else {
-            expect(res.statusCode).toEqual(401);
-            expect(typeof res.body).toEqual("object")
-            expect(res.body).toHaveProperty("message", "Please login first")
-            done()
-          }
-        })
-    })
-  })
-  describe.each([
-    ["price", "empty", { ...art, price: "" }, "Price is required"],
-    [
-      "price",
-      "negative value",
-      { ...art, price: -300000 },
-      "Price must be greater then 0",
-    ],
-    [
-      "like_count",
-      "negative value",
-      { ...art, like_count: -1 },
-      "Like Count must be greater then 0",
-    ],
-  ])("failed case with status code 400", (attribute, testCase, input, expected) => {
-    it(`should return message '${expected}' when ${attribute} is '${testCase}'`, (done) => {
-      request(app)
-        .post("/arts")
-        .set("access_token", admin_token)
-        .field('price', art.price)
-        .field('like_count', art.like_count)
-        .attach('fileTest', art.image_url)
-        .end((err, res) => {
-          if (err) {
-            done(err);
-          } else {
-            expect(res.statusCode).toEqual(400);
-            expect(typeof res.body).toEqual("object");
-            expect(res.body).toHaveProperty("message", `${expected}`);
+describe("Post /arts", () => {
+  before((done) => {
+    Category.insertMany(categories)
+      .then((data) => {
+        categoriesData = data;
+        return new Promise((resolve, reject) => {
+          Chai.request(app)
+            .post("/register")
+            .send({ ...users[0] })
+            .end((err, res) => {
+              if (err) reject(err);
+              resolve(res.body);
+            });
+        });
+      })
+      .then(() => {
+        Chai.request(app)
+          .post("/login")
+          .send({
+            email: users[0].email,
+            password: users[0].password,
+          })
+          .end((err, res) => {
+            if (err) throw err;
+            userData = res.body;
             done();
-          }
+          });
+      })
+      .catch((err) => console.log(err));
+  });
+
+  after((done) => {
+    Category.deleteMany({})
+      .then(() => User.deleteMany({}))
+      .then(() => Art.deleteMany({}))
+      .then(() => deleteImage(image_url))
+      .then(() => done())
+      .catch((err) => console.log(err));
+  });
+
+  describe("succes case", () => {
+    it("should return response with status code 201", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .set("access_token", userData.access_token)
+        .field("title", arts[0].title)
+        .field("price", arts[0].price)
+        .field(
+          "categories",
+          `${categoriesData[0]._id}, ${categoriesData[1]._id}`
+        )
+        .attach(
+          "image_url",
+          fs.readFileSync(arts[0].image_url),
+          arts[0].image_name
+        )
+        .end((err, res) => {
+          image_url = res.body.image_url;
+          expect(err).to.be.null;
+          expect(res).to.have.status(201);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("_id");
+          expect(res.body).to.have.property("user");
+          expect(res.body).to.have.property("title");
+          expect(res.body).to.have.property("image_url");
+          expect(res.body).to.have.property("price");
+          expect(res.body).to.have.property("likes");
+          expect(res.body).to.have.property("categories");
+          done();
         });
     });
-  })
-  describe("failed case with status code 400", () => {
-    it("should return 'Image is required' when image not attached", (done) => {
-      request(app)
-        .post('/arts')
-        .set("access_token", admin_token)
-        .field('price', art.price)
-        .field('like_count', art.like_count)
+  });
+
+  describe("failed case, with 400 status code", () => {
+    it("should return error when title is null", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .set("access_token", userData.access_token)
+        .field("title", "")
+        .field("price", arts[0].price)
+        .field(
+          "categories",
+          `${categoriesData[0]._id}, ${categoriesData[1]._id}`
+        )
+        .attach(
+          "image_url",
+          fs.readFileSync(arts[0].image_url),
+          arts[0].image_name
+        )
         .end((err, res) => {
-          if(err){
-            done(err)
-          }else{
-            expect(res.statusCode).toEqual(201)
-            expect(typeof res.body).toEqual("object")
-            expect(res.body).toHaveProperty("_id")
-            expect(typeof res.body._id).toEqual("string")
-            expect(res.body).toHaveProperty("image_url")
-            expect(typeof res.body.image_url).toEqual("string")
-            expect(res.body).toHaveProperty("price", product.price)
-            expect(res.body).toHaveProperty("like_count", product.like_count)
-            done();
-          }
-        })
-    })
-  })
-})
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal(
+            "Art validation failed: title: Path `title` is required."
+          );
+          done();
+        });
+    });
+
+    it("should return error when price is null", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .set("access_token", userData.access_token)
+        .field("title", arts[0].title)
+        .field("price", "")
+        .field(
+          "categories",
+          `${categoriesData[0]._id}, ${categoriesData[1]._id}`
+        )
+        .attach(
+          "image_url",
+          fs.readFileSync(arts[0].image_url),
+          arts[0].image_name
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal(
+            "Art validation failed: price: Path `price` is required."
+          );
+          done();
+        });
+    });
+
+    it("should return error when categories is null", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .set("access_token", userData.access_token)
+        .field("title", arts[0].title)
+        .field("price", arts[0].price)
+        .field("categories", "")
+        .attach(
+          "image_url",
+          fs.readFileSync(arts[0].image_url),
+          arts[0].image_name
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal(
+            `Art validation failed: categories.0: Cast to [ObjectId] failed for value "[""]" at path "categories.0"`
+          );
+          done();
+        });
+    });
+
+    it("should return error when image_url is null", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .set("access_token", userData.access_token)
+        .field("title", arts[0].title)
+        .field("price", arts[0].price)
+        .field(
+          "categories",
+          `${categoriesData[0]._id}, ${categoriesData[1]._id}`
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Image is required");
+          done();
+        });
+    });
+
+    it("should return error when image uploaded is not on jpg / png format", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .set("access_token", userData.access_token)
+        .field("title", arts[0].title)
+        .field("price", arts[0].price)
+        .attach(
+          "image_url",
+          fs.readFileSync("./test/data/instagram.svg"),
+          "instagram.svg"
+        )
+        .field(
+          "categories",
+          `${categoriesData[0]._id}, ${categoriesData[1]._id}`
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Uploaded file must be image");
+          done();
+        });
+    });
+  });
+
+  describe("failed case, with 401 status code", () => {
+    it("should return error when access_token is null", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .field("title", arts[0].title)
+        .field("price", arts[0].price)
+        .field(
+          "categories",
+          `${categoriesData[0]._id}, ${categoriesData[1]._id}`
+        )
+        .attach(
+          "image_url",
+          fs.readFileSync(arts[0].image_url),
+          arts[0].image_name
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Please login first");
+          done();
+        });
+    });
+  });
+});

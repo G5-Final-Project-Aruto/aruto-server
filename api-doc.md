@@ -133,9 +133,9 @@ _Request Body_
 ```json
 {
   "title": "string",
-  "image_url": "string",
+  "image_url": "file",
   "price": "integer",
-  "categories": "[string]"
+  "categories": "string"
 }
 ```
 
@@ -144,11 +144,15 @@ _Response (201)_
 ```json
 {
   "_id": "ObjectId",
-  "user": "ObjectId",
+  "user": {
+    "_id": "ObjectId",
+    "full_name": "string"
+  },
   "title": "string",
   "image_url": "string",
   "price": "integer",
-  "likes": "[]"
+  "likes": "[]",
+  "categories": "[ObjectId]"
 }
 ```
 
@@ -176,23 +180,25 @@ _Response (200)_
     "_id": "ObjectId",
     "user": {
       "_id": "ObjectId",
-      "username": "ObjectId"
+      "username": "string"
     },
     "title": "string",
     "image_url": "string",
     "price": "integer",
-    "likesCount": "integer"
+    "likes": "[]",
+    "categories": "[ObjectId]"
   },
   {
     "_id": "ObjectId",
     "user": {
       "_id": "ObjectId",
-      "username": "ObjectId"
+      "username": "string"
     },
     "title": "string",
     "image_url": "string",
     "price": "integer",
-    "likesCount": "integer"
+    "likes": "[]",
+    "categories": "[ObjectId]"
   }
 ]
 ```
@@ -214,7 +220,7 @@ _Request Body_
 ```json
 {
   "title": "string",
-  "image_url": "string",
+  "latestUrl": "string",
   "price": "integer",
   "categories": "[string]"
 }
@@ -306,49 +312,13 @@ _Response (200)_
 [
   {
     "_id": "ObjectId",
-    "title": "string"
+    "title": "string",
+    "image_url": "string"
   },
   {
     "_id": "ObjectId",
-    "title": "string"
+    "title": "string",
+    "image_url": "string"
   }
 ]
-```
-
-### GET /categories/:id
-
-> Get category detail
-
-_Request Header_
-
-```json
-not needed
-```
-
-_Request Body_
-
-```json
-not needed
-```
-
-_Response (200)_
-
-```json
-{
-  "_id": "ObjectId",
-  "title": "string",
-  "arts": [
-    {
-      "_id": "ObjectId",
-      "user": {
-        "_id": "ObjectId",
-        "username": "ObjectId"
-      },
-      "title": "string",
-      "image_url": "string",
-      "price": "integer",
-      "likesCount": "integer"
-    }
-  ]
-}
 ```

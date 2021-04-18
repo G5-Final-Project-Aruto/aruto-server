@@ -22,10 +22,7 @@ class Controller {
         full_name: user.full_name,
       });
     } catch (err) {
-      next({
-        code: 400,
-        name: 'user is required'
-      });
+      next(err);
     }
   }
 
@@ -47,6 +44,17 @@ class Controller {
       res.status(200).json({ ...payload, access_token });
     } catch (err) {
       next(err);
+    }
+  }
+
+  static async getUser(req, res, next) {
+    try {
+      const user = await User.findById({
+        _id: req.currentUser._id
+      }).populate('arts')
+      res.status(200).json(user)
+    } catch (error) {
+      next(error)
     }
   }
 }

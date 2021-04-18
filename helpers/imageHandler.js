@@ -30,7 +30,7 @@ const uploadImage = (req) => {
     busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
       uploadedImage = true;
       const ext = mimetype.split("/")[1];
-      if (["jpeg", "jpg", "png"].includes(ext) === -1) {
+      if (!["jpeg", "jpg", "png"].includes(ext)) {
         reject({ name: "Uploaded file must be image" });
         return;
       }
@@ -49,6 +49,7 @@ const uploadImage = (req) => {
       const dataReturn = {
         title: fields.title,
         price: fields.price,
+        categories: fields.categories,
       };
 
       if (!uploadedImage && !fields.latestUrl) {
