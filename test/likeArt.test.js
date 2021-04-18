@@ -10,7 +10,7 @@ const { deleteImage } = require("../helpers");
 
 Chai.use(chaiHttp);
 
-let usersData, categoriesData, image_urls, artIds;
+let usersData, categoriesData, artsCreated;
 
 const registerUser = (user) => {
   return new Promise((resolve, reject) => {
@@ -55,7 +55,7 @@ const createArts = (art, user, categories) => {
   });
 };
 
-describe("Delete /arts", () => {
+describe("Put /arts", () => {
   before((done) => {
     Category.insertMany(categories)
       .then((data) => {
@@ -73,8 +73,7 @@ describe("Delete /arts", () => {
         ]);
       })
       .then((res) => {
-        image_urls = res.map((art) => art.image_url);
-        artIds = res.map((art) => art._id);
+        artsCreated = res;
         done();
       })
       .catch((err) => console.log(err));
@@ -85,46 +84,35 @@ describe("Delete /arts", () => {
       .then(() => User.deleteMany({}))
       .then(() => Art.deleteMany({}))
       .then(() =>
-        Promise.all([deleteImage(image_urls[0]), deleteImage(image_urls[1])])
+        Promise.all([
+          deleteImage(artsCreated[0].image_url),
+          deleteImage(artsCreated[1].image_url),
+        ])
       )
       .then(() => done())
       .catch((err) => console.log(err));
   });
 
   describe("succes case", () => {
-    it("should return response with status code 200 when success delete art", (done) => {
+    it("should return response with status code 200 when success like art", (done) => {
       Chai.request(app)
-        .delete(`/arts/${artIds[0]}`)
+        .patch(`/arts/${artsCreated[0]._id}/like`)
         .set("access_token", usersData[0].access_token)
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("message");
-          expect(res.body.message).to.equal("Art deleted succesfully");
+          expect(res.body.message).to.equal("Art has been liked");
           done();
         });
     });
   });
 
   describe("failed case with status code 401", () => {
-    it("should return error when different user try to delete other user art", (done) => {
-      Chai.request(app)
-        .delete(`/arts/${artIds[1]}`)
-        .set("access_token", usersData[1].access_token)
-        .end((err, res) => {
-          expect(err).to.be.null;
-          expect(res).to.have.status(401);
-          expect(res.body).to.be.an("object");
-          expect(res.body).to.have.property("message");
-          expect(res.body.message).to.equal("Unauthorize user");
-          done();
-        });
-    });
-
     it("should return error when access_token is null", (done) => {
       Chai.request(app)
-        .delete(`/arts/${artIds[1]}`)
+        .patch(`/arts/${artsCreated[0]._id}/like`)
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(401);

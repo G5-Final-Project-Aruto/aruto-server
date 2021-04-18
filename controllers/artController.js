@@ -75,56 +75,54 @@ class Controller {
 
   static async deleteArt(req, res, next) {
     try {
-      const art = await Art.deleteOne({
+      await Art.deleteOne({
         _id: req.params.id,
       });
 
-      if (art.deletedCount > 0) {
-        res.status(200).json({ message: "success delete art" });
-      } else {
-        throw { name: "Art not found" };
-      }
+      res.status(200).json({ message: "Art deleted succesfully" });
     } catch (error) {
       next(error);
     }
   }
 
   static async updateArt(req, res, next) {
+    let image_url = "";
     try {
-      const { title, image_url, price } = req.body;
-      const dataArt = await Art.findOne({
-        _id: req.params.id,
-      });
-      const art = await Art.updateOne(
+      const data = await uploadImage(req);
+      image_url = data.image_url;
+
+      await Art.updateOne(
         {
           _id: req.params.id,
         },
         {
           $set: {
-            title,
-            image_url,
-            price,
+            ...data,
+            categories: data.categories.split(",").map((cat) => cat.trim()),
           },
         }
       );
-      res.status(200).json(dataArt);
+
+      res.status(200).json({ message: "Art has been updated" });
     } catch (error) {
+      if (image_url !== "") await deleteImage(image_url);
       next(error);
     }
   }
 
   static async addLikeArt(req, res, next) {
     try {
-      const art = await Art.updateOne(
+      await Art.updateOne(
         {
           _id: req.params.id,
         },
         {
           $push: {
-            likes: req.currentUser,
+            likes: req.currentUser._id,
           },
         }
       );
+
       res.status(200).json({
         message: "Art has been liked",
       });
