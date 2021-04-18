@@ -30,7 +30,7 @@ class Controller {
 
   static async getAllArt(req, res, next) {
     try {
-      const arts = await Art.find().populate("user").populate('categories');
+      const arts = await Art.find().populate("user").populate("categories");
       const dataArts = arts.map((art) => {
         return {
           _id: art._id,
@@ -55,7 +55,9 @@ class Controller {
     try {
       const art = await Art.findOne({
         _id: req.params.id,
-      }).populate("user").populate('categories');
+      })
+        .populate("user")
+        .populate("categories");
       res.status(200).json({
         _id: art._id,
         user: {
