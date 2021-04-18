@@ -55,7 +55,7 @@ const createArts = (art, user, categories) => {
   });
 };
 
-describe("Post /arts", () => {
+describe("Get /arts", () => {
   before((done) => {
     Category.insertMany(categories)
       .then((data) => {

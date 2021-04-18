@@ -22,10 +22,7 @@ class Controller {
         full_name: user.full_name,
       });
     } catch (err) {
-      next({
-        code: 400,
-        name: 'user is required'
-      });
+      next(err);
     }
   }
 

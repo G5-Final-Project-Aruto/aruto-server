@@ -1,8 +1,5 @@
 module.exports = (err, req, res, next) => {
-  console.log(err);
-  if (!err) {
-    next();
-  }
+  if (!err) return;
 
   let error = {
     status: 500,
@@ -12,16 +9,10 @@ module.exports = (err, req, res, next) => {
   switch (err.name) {
     case "Invalid email / password":
     case "Image is required":
+    case "Uploaded file must be image":
       error = {
         ...error,
         status: 400,
-        message: err.name,
-      };
-      break;
-    case "Please login first":
-      error = {
-        ...error,
-        status: 401,
         message: err.name,
       };
       break;
@@ -38,6 +29,14 @@ module.exports = (err, req, res, next) => {
         ...error,
         status: 400,
         message: `${attribute} is unique`,
+      };
+      break;
+    case "Please login first":
+    case "Unauthorize user":
+      error = {
+        ...error,
+        status: 401,
+        message: err.name,
       };
       break;
     default:

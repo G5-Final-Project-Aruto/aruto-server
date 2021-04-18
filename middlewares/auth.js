@@ -25,14 +25,13 @@ async function authorization(req, res, next) {
 }
 async function authentication(req, res, next) {
   try {
-    const art = await Art.findById({
-      _id: req.params.id,
-    });
-    if (art.user === req.currentUser._id) {
-      next();
-    } else {
-      throw { name: "User cannot access this Art" };
+    const user = await User.findOne({ _id: req.currentUser._id });
+
+    if (!user.arts.includes(req.params.id)) {
+      throw { name: "Unauthorize user" };
     }
+
+    next();
   } catch (error) {
     next(error);
   }
