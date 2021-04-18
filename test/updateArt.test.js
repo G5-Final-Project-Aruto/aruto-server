@@ -138,7 +138,7 @@ describe("Put /arts", () => {
   describe("failed case with status code 401", () => {
     it("should return error when different user try to update other user art", (done) => {
       Chai.request(app)
-        .delete(`/arts/${artsCreated[0]._id}`)
+        .put(`/arts/${artsCreated[0]._id}`)
         .set("access_token", usersData[1].access_token)
         .end((err, res) => {
           expect(err).to.be.null;
@@ -152,7 +152,7 @@ describe("Put /arts", () => {
 
     it("should return error when access_token is null", (done) => {
       Chai.request(app)
-        .delete(`/arts/${artsCreated[0]._id}`)
+        .put(`/arts/${artsCreated[0]._id}`)
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(401);

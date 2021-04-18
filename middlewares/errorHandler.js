@@ -1,7 +1,5 @@
 module.exports = (err, req, res, next) => {
-  if (!err) {
-    next();
-  }
+  if (!err) return;
 
   let error = {
     status: 500,
@@ -11,6 +9,7 @@ module.exports = (err, req, res, next) => {
   switch (err.name) {
     case "Invalid email / password":
     case "Image is required":
+    case "Uploaded file must be image":
       error = {
         ...error,
         status: 400,
@@ -37,13 +36,6 @@ module.exports = (err, req, res, next) => {
       error = {
         ...error,
         status: 401,
-        message: err.name,
-      };
-      break;
-    case "Art not found":
-      error = {
-        ...error,
-        status: 404,
         message: err.name,
       };
       break;

@@ -75,13 +75,9 @@ class Controller {
 
   static async deleteArt(req, res, next) {
     try {
-      const art = await Art.deleteOne({
+      await Art.deleteOne({
         _id: req.params.id,
       });
-
-      if (art.deletedCount === 0) {
-        throw { name: "Art not found" };
-      }
 
       res.status(200).json({ message: "Art deleted succesfully" });
     } catch (error) {
@@ -116,16 +112,17 @@ class Controller {
 
   static async addLikeArt(req, res, next) {
     try {
-      const art = await Art.updateOne(
+      await Art.updateOne(
         {
           _id: req.params.id,
         },
         {
           $push: {
-            likes: req.currentUser,
+            likes: req.currentUser._id,
           },
         }
       );
+
       res.status(200).json({
         message: "Art has been liked",
       });

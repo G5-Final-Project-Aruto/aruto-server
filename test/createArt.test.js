@@ -183,6 +183,31 @@ describe("Post /arts", () => {
           done();
         });
     });
+
+    it("should return error when image uploaded is not on jpg / png format", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .set("access_token", userData.access_token)
+        .field("title", arts[0].title)
+        .field("price", arts[0].price)
+        .attach(
+          "image_url",
+          fs.readFileSync("./test/data/instagram.svg"),
+          "instagram.svg"
+        )
+        .field(
+          "categories",
+          `${categoriesData[0]._id}, ${categoriesData[1]._id}`
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Uploaded file must be image");
+          done();
+        });
+    });
   });
 
   describe("failed case, with 401 status code", () => {
