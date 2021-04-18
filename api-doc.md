@@ -220,7 +220,7 @@ _Request Body_
 ```json
 {
   "title": "string",
-  "image_url": "string",
+  "latestUrl": "string",
   "price": "integer",
   "categories": "[string]"
 }
