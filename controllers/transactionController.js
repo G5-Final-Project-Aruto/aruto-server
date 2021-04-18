@@ -1,55 +1,64 @@
 const {Transaction} = require('../models')
-// const snap = require('../midtrans')
+const midtransClient = require('midtrans-client')
+const serverKey = 'SB-Mid-server-OC-CpMu5lkZ2JT7mMyfnvDf0';
+const clientKey = 'SB-Mid-client-kOg3pJdjMxNkUPCY'
+
+const { v4: uuidv4} = require('uuid')
+
+let snap = new midtransClient.Snap({
+  // Set to true if you want Production Environment (accept real transaction).
+  isProduction : false,
+  serverKey : serverKey,
+  clientKey : clientKey
+});
 
 class TransactionController {
-
-  // static transactionMidtrans(req, res) {
-  //   try{
-  //     const input = {
-  //       transaction_detail: {
-  //         order_id: req.body.order_id,
-  //         gross_amount: req.body.gross_amount
-  //       }
-  //     }
-  //     const transaction = await Transaction.create(input)
-
-  //     const Token = snap.createTransaction(parameter)
-  //         .then((transaction)=>{
-  //             // transaction token
-  //             let transactionToken = transaction.token;
-  //             console.log('transactionToken:',transactionToken);
-  //             res.status(200).json({ transactionToken })
-  //         })
-  //         .catch( err => {
-  //           console.log({error: err})
-  //         })
-  //   } catch (err) {
-
-  //   }
-  // }
-
   static async transactionCreate (req,res,next) {
     try {
+      console.log(req.currentUser, 'INI CURRENT USER')
+      console.log(req.body, 'INI TEST ')
       const input = {
-        arts: req.body.arts,
-        address: req.body.address,
-        totalPrice: req.body.totalPrice,
-        status:req.body.status,
-        userId: 4 //hardcode
+        transaction_details:{
+          arts: req.body.arts,
+          address: req.body.address,
+          order_id: uuidv4(),
+          gross_amount: req.body.gross_amount,
+          status:"pending",
+          userId: req.currentUser
+        }
       }
-      const transaction = await Transaction.create(input);
-     
-      res.status(201).json({
-        arts: transaction.arts,
-        address: transaction.address,
-        totalPrice: transaction.totalPrice,
-        status: transaction.status,
-        userId: transaction.userId
+      // const transaction = await Transaction.create(input);
+      let snap = new midtransClient.Snap({
+        // Set to true if you want Production Environment (accept real transaction).
+        isProduction : false,
+        serverKey : serverKey,
+        clientKey : clientKey
       });
+      
+      const Token = snap.createTransaction(input)
+      .then((transaction)=>{
+        console.log(input)
+        // transaction token
+        let transactionToken = transaction;
+        console.log('transactionToken:',transactionToken);
+        res.status(201).json(transactionToken)
+        })
+      .catch( err => {
+          console.log({error: err})
+          })
     } catch (err) {
       next(err);
     }
   }
+  
+  static async done(req,res,next){
+    try{
+      Transaction.findOne
+
+    } catch(err) {
+
+    }
+  } 
 }
 
 module.exports = TransactionController
