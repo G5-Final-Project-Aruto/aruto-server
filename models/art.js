@@ -23,6 +23,12 @@ const artSchema = Schema({
       ref: "User",
     },
   ],
+  categories: [
+    {
+      type: ObjectId,
+      ref: "Category",
+    },
+  ],
 });
 
 module.exports = model("Art", artSchema);

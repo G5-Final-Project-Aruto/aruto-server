@@ -1,5 +1,5 @@
 module.exports = (err, req, res, next) => {
-  console.log(err.errors)
+  console.log(err);
   if (!err) {
     next();
   }
@@ -11,9 +11,17 @@ module.exports = (err, req, res, next) => {
 
   switch (err.name) {
     case "Invalid email / password":
+    case "Image is required":
       error = {
         ...error,
         status: 400,
+        message: err.name,
+      };
+      break;
+    case "Please login first":
+      error = {
+        ...error,
+        status: 401,
         message: err.name,
       };
       break;
