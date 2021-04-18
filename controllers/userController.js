@@ -46,6 +46,17 @@ class Controller {
       next(err);
     }
   }
+
+  static async getUser(req, res, next) {
+    try {
+      const user = await User.findById({
+        _id: req.currentUser._id
+      }).populate('arts')
+      res.status(200).json(user)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = Controller;
