@@ -144,7 +144,10 @@ _Response (201)_
 ```json
 {
   "_id": "ObjectId",
-  "user": "ObjectId",
+  "user": {
+    "_id": "ObjectId",
+    "full_name": "string"
+  },
   "title": "string",
   "image_url": "string",
   "price": "integer",
@@ -177,23 +180,25 @@ _Response (200)_
     "_id": "ObjectId",
     "user": {
       "_id": "ObjectId",
-      "username": "ObjectId"
+      "username": "string"
     },
     "title": "string",
     "image_url": "string",
     "price": "integer",
-    "likesCount": "integer"
+    "likes": "[]",
+    "categories": "[ObjectId]"
   },
   {
     "_id": "ObjectId",
     "user": {
       "_id": "ObjectId",
-      "username": "ObjectId"
+      "username": "string"
     },
     "title": "string",
     "image_url": "string",
     "price": "integer",
-    "likesCount": "integer"
+    "likes": "[]",
+    "categories": "[ObjectId]"
   }
 ]
 ```

@@ -7,10 +7,11 @@ const app = require("../app");
 const { Art, User, Category } = require("../models");
 const { arts, users, categories } = require("./data/data");
 const { deleteImage } = require("../helpers");
+const { Promise } = require("mongoose");
 
 Chai.use(chaiHttp);
 
-let userData, categoriesData, image_url, artId;
+let usersData, categoriesData, image_urls, artIds;
 
 const registerUser = (user) => {
   return new Promise((resolve, reject) => {
@@ -55,23 +56,26 @@ const createArts = (art, user, categories) => {
   });
 };
 
-describe("Post /arts", () => {
+describe("Delete /arts", () => {
   before((done) => {
     Category.insertMany(categories)
       .then((data) => {
         categoriesData = data;
-        return registerUser(users[0]);
+        return Promise.all([registerUser(users[0]), registerUser(users[1])]);
       })
       .then(() => {
-        return loginUser(users[0]);
+        return Promise.all([loginUser(users[0]), loginUser(users[1])]);
       })
       .then((res) => {
-        userData = res;
-        return createArts(arts[0], userData, categoriesData);
+        usersData = res;
+        return Promise.all([
+          createArts(arts[0], usersData[0], categoriesData),
+          createArts(arts[1], usersData[0], categoriesData),
+        ]);
       })
       .then((res) => {
-        image_url = res.image_url;
-        artId = res._id;
+        image_urls = res.map((art) => art.image_url);
+        artIds = res.map((art) => art._id);
         done();
       })
       .catch((err) => console.log(err));
@@ -81,46 +85,53 @@ describe("Post /arts", () => {
     Category.deleteMany({})
       .then(() => User.deleteMany({}))
       .then(() => Art.deleteMany({}))
-      .then(() => deleteImage(image_url))
+      .then(() =>
+        Promise.all([deleteImage(image_urls[0]), deleteImage(image_urls[1])])
+      )
       .then(() => done())
       .catch((err) => console.log(err));
   });
 
-  describe("succes case get", () => {
-    it("should return response with status code 200 when get all arts", (done) => {
+  describe("succes case", () => {
+    it("should return response with status code 200 when success delete art", (done) => {
       Chai.request(app)
-        .get("/arts")
-        .end((err, res) => {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an("array");
-          expect(res.body[0]).to.have.property("_id");
-          expect(res.body[0]).to.have.property("user");
-          expect(res.body[0]).to.have.property("title");
-          expect(res.body[0]).to.have.property("image_url");
-          expect(res.body[0]).to.have.property("price");
-          expect(res.body[0]).to.have.property("likes");
-          expect(res.body[0]).to.have.property("categories");
-          done();
-        });
-    });
-
-    it("should return response with status code 200 when get one arts", (done) => {
-      Chai.request(app)
-        .get(`/arts/${artId}`)
+        .delete(`/arts/${artIds[0]}`)
+        .set("access_token", usersData[0].access_token)
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
           expect(res.body).to.be.an("object");
-          expect(res.body).to.have.property("_id");
-          expect(res.body).to.have.property("user");
-          expect(res.body.user).to.be.an("object");
-          expect(res.body).to.have.property("title");
-          expect(res.body).to.have.property("image_url");
-          expect(res.body).to.have.property("price");
-          expect(res.body).to.have.property("likes");
-          expect(res.body).to.have.property("categories");
-          expect(res.body.categories).to.be.an("array");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Art deleted succesfully");
+          done();
+        });
+    });
+  });
+
+  describe("failed case with status code 401", () => {
+    it("should return error when different user try to delete other user art", (done) => {
+      Chai.request(app)
+        .delete(`/arts/${artIds[1]}`)
+        .set("access_token", usersData[1].access_token)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Unauthorize user");
+          done();
+        });
+    });
+
+    it("should return error when access_token is null", (done) => {
+      Chai.request(app)
+        .delete(`/arts/${artIds[1]}`)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Please login first");
           done();
         });
     });

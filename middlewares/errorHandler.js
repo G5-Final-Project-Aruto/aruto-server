@@ -1,5 +1,4 @@
 module.exports = (err, req, res, next) => {
-  console.log(err);
   if (!err) {
     next();
   }
@@ -18,13 +17,6 @@ module.exports = (err, req, res, next) => {
         message: err.name,
       };
       break;
-    case "Please login first":
-      error = {
-        ...error,
-        status: 401,
-        message: err.name,
-      };
-      break;
     case "ValidationError":
       error = {
         ...error,
@@ -38,6 +30,21 @@ module.exports = (err, req, res, next) => {
         ...error,
         status: 400,
         message: `${attribute} is unique`,
+      };
+      break;
+    case "Please login first":
+    case "Unauthorize user":
+      error = {
+        ...error,
+        status: 401,
+        message: err.name,
+      };
+      break;
+    case "Art not found":
+      error = {
+        ...error,
+        status: 404,
+        message: err.name,
       };
       break;
     default:

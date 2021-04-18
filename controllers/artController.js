@@ -79,11 +79,11 @@ class Controller {
         _id: req.params.id,
       });
 
-      if (art.deletedCount > 0) {
-        res.status(200).json({ message: "success delete art" });
-      } else {
+      if (art.deletedCount === 0) {
         throw { name: "Art not found" };
       }
+
+      res.status(200).json({ message: "Art deleted succesfully" });
     } catch (error) {
       next(error);
     }
