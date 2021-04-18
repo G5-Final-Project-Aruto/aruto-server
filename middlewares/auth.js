@@ -26,8 +26,10 @@ async function authentication( req, res, next ) {
   try {
     const art = await Art.findById({
       _id: req.params.id
-    })
-    if(art.user === req.currentUser._id){
+    }).populate('user')
+    console.log(art, "ini art")
+    console.log(req.currentUser, "ini user")
+    if(art.user._id == req.currentUser._id){
       next()
     }else {
       throw ({name: "User cannot access this Art"})
