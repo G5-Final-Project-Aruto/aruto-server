@@ -59,6 +59,7 @@ describe("Post /arts", () => {
         .set("access_token", userData.access_token)
         .field("title", arts[0].title)
         .field("price", arts[0].price)
+        .field("description", arts[0].description)
         .field(
           "categories",
           `${categoriesData[0]._id}, ${categoriesData[1]._id}`
@@ -80,6 +81,7 @@ describe("Post /arts", () => {
           expect(res.body).to.have.property("price");
           expect(res.body).to.have.property("likes");
           expect(res.body).to.have.property("categories");
+          expect(res.body).to.have.property("description");
           done();
         });
     });
@@ -92,6 +94,7 @@ describe("Post /arts", () => {
         .set("access_token", userData.access_token)
         .field("title", "")
         .field("price", arts[0].price)
+        .field("description", arts[0].description)
         .field(
           "categories",
           `${categoriesData[0]._id}, ${categoriesData[1]._id}`
@@ -119,6 +122,7 @@ describe("Post /arts", () => {
         .set("access_token", userData.access_token)
         .field("title", arts[0].title)
         .field("price", "")
+        .field("description", arts[0].description)
         .field(
           "categories",
           `${categoriesData[0]._id}, ${categoriesData[1]._id}`
@@ -146,6 +150,7 @@ describe("Post /arts", () => {
         .set("access_token", userData.access_token)
         .field("title", arts[0].title)
         .field("price", arts[0].price)
+        .field("description", arts[0].description)
         .field("categories", "")
         .attach(
           "image_url",
@@ -170,6 +175,7 @@ describe("Post /arts", () => {
         .set("access_token", userData.access_token)
         .field("title", arts[0].title)
         .field("price", arts[0].price)
+        .field("description", arts[0].description)
         .field(
           "categories",
           `${categoriesData[0]._id}, ${categoriesData[1]._id}`
@@ -190,6 +196,7 @@ describe("Post /arts", () => {
         .set("access_token", userData.access_token)
         .field("title", arts[0].title)
         .field("price", arts[0].price)
+        .field("description", arts[0].description)
         .attach(
           "image_url",
           fs.readFileSync("./test/data/instagram.svg"),
@@ -208,6 +215,34 @@ describe("Post /arts", () => {
           done();
         });
     });
+
+    it("should return error when description is null", (done) => {
+      Chai.request(app)
+        .post("/arts")
+        .set("access_token", userData.access_token)
+        .field("title", arts[0].title)
+        .field("price", arts[0].price)
+        .field("description", "")
+        .field(
+          "categories",
+          `${categoriesData[0]._id}, ${categoriesData[1]._id}`
+        )
+        .attach(
+          "image_url",
+          fs.readFileSync(arts[0].image_url),
+          arts[0].image_name
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal(
+            "Art validation failed: description: Path `description` is required."
+          );
+          done();
+        });
+    });
   });
 
   describe("failed case, with 401 status code", () => {
@@ -216,6 +251,7 @@ describe("Post /arts", () => {
         .post("/arts")
         .field("title", arts[0].title)
         .field("price", arts[0].price)
+        .field("description", arts[0].description)
         .field(
           "categories",
           `${categoriesData[0]._id}, ${categoriesData[1]._id}`

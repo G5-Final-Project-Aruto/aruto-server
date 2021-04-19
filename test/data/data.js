@@ -30,12 +30,14 @@ const arts = [
   {
     title: "art1",
     price: 200000,
+    description: "lorem ipsum",
     image_url: "./test/data/art.png",
     image_name: "art.png",
   },
   {
     title: "art2",
     price: 200000,
+    description: "lorem ipsum",
     image_url: "./test/data/art.png",
     image_name: "art.png",
   },
