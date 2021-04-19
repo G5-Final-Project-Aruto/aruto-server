@@ -22,16 +22,18 @@ class TransactionController {
       };
 
       const transaction = await Transaction.create(newTransaction);
-
-      const transactionToken = await snap.createTransactionToken({
-        transaction_details: {
-          order_id: uuidv4(),
-          gross_amount,
-        },
-        enabled_payments: ["credit_card"],
-      });
+      const transactionDetail = 
+        {
+          transaction_details: {
+            order_id: uuidv4(),
+            gross_amount,
+          },
+          enabled_payments: ["bca_va"],
+        }   
+      const transactionToken = await snap.createTransactionToken(transactionDetail);
 
       res.status(201).json({
+        transactionDetail,
         transactionToken,
         clientKey: snap.apiConfig.clientKey,
         transactionId: transaction._id,
@@ -55,6 +57,73 @@ class TransactionController {
         }
       );
       res.status(200).json({ message: "Payment succesfully" });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static check(req,res,next) {
+    console.log(req.body,'ini body')
+    //request id order
+   snap.transaction.status(req.body.transactionId)
+   .then(data => {
+     console.log(data,'ini data')
+    res.status(200).json(data)
+   })
+   .catch(err =>{
+     res.status(err)
+   })
+  }
+
+
+  static checkManual(req,res,next) {
+    //request id order
+   console.log(req.params.id,"INI PARAMS")
+   snap.transaction.status(req.params.id)
+   .then(data => {
+     console.log(data,'INI DATA')
+    res.status(200).json(data)
+   })
+   .catch(err =>{
+     console.log('ini error', err)
+     res.status(err)
+   })
+  }
+
+  static async transactionPending(req, res, next) {
+    try {
+      const { transactionId } = req.body;
+      await Transaction.updateOne(
+        {
+          _id: transactionId,
+        },
+        {
+          $set: {
+            status: "onPending",
+          },
+        }
+      );
+      res.status(200).json({ message: "Payment on Pending" });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+
+  static async transactionError(req, res, next) {
+    try {
+      const { transactionId } = req.body;
+      await Transaction.updateOne(
+        {
+          _id: transactionId,
+        },
+        {
+          $set: {
+            status: "onPending",
+          },
+        }
+      );
+      res.status(200).json({ message: "Payment on Pending" });
     } catch (err) {
       res.status(500).json(err);
     }
