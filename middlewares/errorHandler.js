@@ -10,6 +10,7 @@ module.exports = (err, req, res, next) => {
     case "Invalid email / password":
     case "Image is required":
     case "Uploaded file must be image":
+    case "transactionId is required":
       error = {
         ...error,
         status: 400,
@@ -36,6 +37,13 @@ module.exports = (err, req, res, next) => {
       error = {
         ...error,
         status: 401,
+        message: err.name,
+      };
+      break;
+    case "Transaction is not found":
+      error = {
+        ...error,
+        status: 404,
         message: err.name,
       };
       break;

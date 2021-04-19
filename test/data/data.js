@@ -43,8 +43,46 @@ const arts = [
   },
 ];
 
+const transactions = [
+  {
+    arts: [
+      {
+        id: "",
+        item: "T-Shirt",
+        size: "XL",
+        color: "white",
+        position: {
+          left: 200,
+          top: 200,
+        },
+        quantity: 2,
+      },
+    ],
+    gross_amount: 100000,
+    address: "Jakarta",
+  },
+  {
+    arts: [
+      {
+        id: "",
+        item: "T-Shirt",
+        size: "XL",
+        color: "white",
+        position: {
+          left: 200,
+          top: 200,
+        },
+        quantity: 2,
+      },
+    ],
+    gross_amount: 100000,
+    address: "Jakarta",
+  },
+];
+
 module.exports = {
   users,
   categories,
   arts,
+  transactions,
 };
