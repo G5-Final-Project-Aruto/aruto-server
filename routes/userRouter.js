@@ -8,7 +8,7 @@ const router = Router();
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
-
-router.get("/user", authorization, UserController.getUser);
+router.get("/users", UserController.getAllUsers)
+router.get("/user/:id", authorization, UserController.getUser);
 
 module.exports = router;

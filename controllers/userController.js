@@ -47,6 +47,15 @@ class Controller {
     }
   }
 
+  static async getAllUsers(req, res, next) {
+    try {
+      const users = await User.find()
+      res.status(200).json(users)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   static async getUser(req, res, next) {
     try {
       const user = await User.findById({
