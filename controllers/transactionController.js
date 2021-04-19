@@ -21,31 +21,21 @@ class TransactionController {
         status: "pending",
       };
 
-      await Transaction.create(newTransaction);
+      const transaction = await Transaction.create(newTransaction);
 
-      const input = {
+      const transactionToken = await snap.createTransactionToken({
         transaction_details: {
           order_id: uuidv4(),
-          gross_amount: +req.body.gross_amount,
+          gross_amount,
         },
-      };
+        enabled_payments: ["credit_card"],
+      });
 
-      const transactionToken = await snap.createTransactionToken();
-      const token = snap
-        .createTransaction(input)
-        .then((transaction) => {
-          console.log(input);
-          // transaction token
-          transactionToken = transaction;
-          console.log("transactionToken:", transactionToken);
-          return Transaction.create(data);
-        })
-        .then((result) => {
-          res.status(201).json({ transactionToken, result });
-        })
-        .catch((err) => {
-          console.log({ error: err });
-        });
+      res.status(201).json({
+        transactionToken,
+        clientKey: snap.apiConfig.clientKey,
+        transactionId: transaction._id,
+      });
     } catch (err) {
       next(err);
     }
@@ -53,8 +43,21 @@ class TransactionController {
 
   static async transactionSuccess(req, res, next) {
     try {
-      Transaction.findOne;
-    } catch (err) {}
+      const { transactionId } = req.body;
+      await Transaction.updateOne(
+        {
+          _id: transactionId,
+        },
+        {
+          $set: {
+            status: "success",
+          },
+        }
+      );
+      res.status(200).json({ message: "Payment succesfully" });
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
 }
 

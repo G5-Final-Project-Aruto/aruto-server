@@ -9,7 +9,4 @@ router.use(authorization);
 router.post("/", TransactionController.transactionCreate);
 router.post("/success", TransactionController.transactionSuccess);
 
-// router.patch("/finished", authorization, TransactionController.done)
-// router.patch("/failed", authorization, TransactionController.failed)
-
 module.exports = router;
