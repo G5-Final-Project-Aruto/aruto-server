@@ -11,6 +11,7 @@ class Controller {
 
       const art = await Art.create({
         ...data,
+        price: +data.price,
         categories: data.categories.split(",").map((cat) => cat.trim()),
         user: req.currentUser._id,
       });
@@ -22,6 +23,7 @@ class Controller {
 
       res.status(201).json(art);
     } catch (error) {
+      console.log(error);
       if (artId !== "") await Art.deleteOne({ _id: artId });
       if (image_url !== "") await deleteImage(image_url);
       next(error);
