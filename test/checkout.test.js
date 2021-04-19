@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const app = require("../app");
 const { Art, User, Category, Transaction } = require("../models");
-const { arts, users, categories, transaction } = require("./data/data");
+const { arts, users, categories, transactions } = require("./data/data");
 const { deleteImage } = require("../helpers");
 
 Chai.use(chaiHttp);
@@ -67,7 +67,7 @@ describe("Post /transaction", () => {
       })
       .then((data) => {
         artData = data;
-        transaction.arts[0].id = data._id;
+        transactions[0].arts[0].id = data._id;
         done();
       })
       .catch((err) => console.log(err));
@@ -81,7 +81,6 @@ describe("Post /transaction", () => {
       Transaction.deleteMany({}),
       deleteImage(artData.image_url),
     ])
-
       .then(() => done())
       .catch((err) => console.log(err));
   });
@@ -91,7 +90,7 @@ describe("Post /transaction", () => {
       Chai.request(app)
         .post("/transaction")
         .set("access_token", userData.access_token)
-        .send(transaction)
+        .send(transactions[0])
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(201);
@@ -107,7 +106,10 @@ describe("Post /transaction", () => {
   describe("failed case, with 400 status code", () => {
     const tests = [
       {
-        args: { ...transaction, arts: [{ ...transaction.arts[0], id: null }] },
+        args: {
+          ...transactions[0],
+          arts: [{ ...transactions[0].arts[0], id: null }],
+        },
         expected: {
           field: "id",
           type: "null",
@@ -117,8 +119,8 @@ describe("Post /transaction", () => {
       },
       {
         args: {
-          ...transaction,
-          arts: [{ ...transaction.arts[0], type: null }],
+          ...transactions[0],
+          arts: [{ ...transactions[0].arts[0], type: null }],
         },
         expected: {
           field: "type",
@@ -128,8 +130,8 @@ describe("Post /transaction", () => {
       },
       {
         args: {
-          ...transaction,
-          arts: [{ ...transaction.arts[0], position: null }],
+          ...transactions[0],
+          arts: [{ ...transactions[0].arts[0], position: null }],
         },
         expected: {
           field: "position",
@@ -140,8 +142,8 @@ describe("Post /transaction", () => {
 
       {
         args: {
-          ...transaction,
-          arts: [{ ...transaction.arts[0], quantity: null }],
+          ...transactions[0],
+          arts: [{ ...transactions[0].arts[0], quantity: null }],
         },
         expected: {
           field: "quantity",
@@ -150,7 +152,7 @@ describe("Post /transaction", () => {
         },
       },
       {
-        args: { ...transaction, gross_amount: null },
+        args: { ...transactions[0], gross_amount: null },
         expected: {
           field: "gross_amount",
           type: "null",
@@ -160,7 +162,7 @@ describe("Post /transaction", () => {
       },
 
       {
-        args: { ...transaction, address: null },
+        args: { ...transactions[0], address: null },
         expected: {
           field: "address",
           type: "null",
@@ -188,11 +190,11 @@ describe("Post /transaction", () => {
     });
   });
 
-  describe("failed case, with 400 status code", () => {
-    it("should return response with status code 401", (done) => {
+  describe("failed case, with 401 status code", () => {
+    it("should return error when access_token is null", (done) => {
       Chai.request(app)
         .post("/transaction")
-        .send(transaction)
+        .send(transactions[0])
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(401);

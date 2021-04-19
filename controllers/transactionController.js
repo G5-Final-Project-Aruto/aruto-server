@@ -43,7 +43,21 @@ class TransactionController {
 
   static async transactionSuccess(req, res, next) {
     try {
+      if (!req.body.transactionId) {
+        throw { name: "transactionId is required" };
+      }
       const { transactionId } = req.body;
+
+      const transaction = await Transaction.findOne({ _id: transactionId });
+
+      if (!transaction) {
+        throw { name: "Transaction is not found" };
+      }
+
+      if (`${transaction.UserId}` !== `${req.currentUser._id}`) {
+        throw { name: "Unauthorize user" };
+      }
+
       await Transaction.updateOne(
         {
           _id: transactionId,
@@ -54,9 +68,10 @@ class TransactionController {
           },
         }
       );
+
       res.status(200).json({ message: "Payment succesfully" });
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 }
