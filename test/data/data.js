@@ -48,8 +48,13 @@ const transactions = [
     arts: [
       {
         id: "",
-        type: "T-Shirt",
-        position: "200",
+        item: "T-Shirt",
+        size: "XL",
+        color: "white",
+        position: {
+          left: 200,
+          top: 200,
+        },
         quantity: 2,
       },
     ],
@@ -60,8 +65,13 @@ const transactions = [
     arts: [
       {
         id: "",
-        type: "T-Shirt",
-        position: "200",
+        item: "T-Shirt",
+        size: "XL",
+        color: "white",
+        position: {
+          left: 200,
+          top: 200,
+        },
         quantity: 2,
       },
     ],

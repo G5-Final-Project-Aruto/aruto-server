@@ -7,13 +7,27 @@ const transactionSchema = Schema({
         type: ObjectId,
         required: true,
       },
-      type: {
+      item: {
+        type: String,
+        required: true,
+      },
+      size: {
+        type: String,
+        required: true,
+      },
+      color: {
         type: String,
         required: true,
       },
       position: {
-        type: String,
-        required: true,
+        left: {
+          type: Number,
+          required: true,
+        },
+        top: {
+          type: Number,
+          required: true,
+        },
       },
       quantity: {
         type: Number,

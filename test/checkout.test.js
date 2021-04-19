@@ -120,26 +120,68 @@ describe("Post /transaction", () => {
       {
         args: {
           ...transactions[0],
-          arts: [{ ...transactions[0].arts[0], type: null }],
+          arts: [{ ...transactions[0].arts[0], item: null }],
         },
         expected: {
-          field: "type",
+          field: "item",
           type: "null",
-          message: "Path `type` is required.",
+          message: "Path `item` is required.",
         },
       },
       {
         args: {
           ...transactions[0],
-          arts: [{ ...transactions[0].arts[0], position: null }],
+          arts: [{ ...transactions[0].arts[0], size: null }],
+        },
+        expected: {
+          field: "size",
+          type: "null",
+          message: "Path `size` is required.",
+        },
+      },
+      {
+        args: {
+          ...transactions[0],
+          arts: [{ ...transactions[0].arts[0], color: null }],
+        },
+        expected: {
+          field: "color",
+          type: "null",
+          message: "Path `color` is required.",
+        },
+      },
+      {
+        args: {
+          ...transactions[0],
+          arts: [
+            {
+              ...transactions[0].arts[0],
+              position: { ...transactions[0].arts[0].position, left: null },
+            },
+          ],
         },
         expected: {
           field: "position",
           type: "null",
-          message: "Path `position` is required.",
+          message: "Path `position.left` is required.",
         },
       },
-
+      {
+        args: {
+          ...transactions[0],
+          arts: [
+            {
+              ...transactions[0].arts[0],
+              position: { ...transactions[0].arts[0].position, top: null },
+            },
+          ],
+        },
+        expected: {
+          field: "position",
+          type: "null",
+          message: "Path `position.top` is required.",
+        },
+      },
       {
         args: {
           ...transactions[0],
