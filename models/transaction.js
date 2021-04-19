@@ -3,25 +3,31 @@ const { Schema, model, ObjectId } = require("mongoose");
 const transactionSchema = Schema({
   arts: [
     {
-      type: ObjectId,
-      ref: "Art",
+      id: {
+        type: ObjectId,
+        ref: "Art",
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
     },
   ],
-  totalPrice: {
-    type: Number
+  gross_amount: {
+    type: Number,
+    required: true,
   },
   address: {
     type: String,
-    required: true
+    required: true,
   },
   status: {
     type: String,
-    required: true
   },
-  User :{
+  UserId: {
     type: ObjectId,
-    ref: 'User'
-  }
+    ref: "User",
+  },
 });
 
 module.exports = model("Transaction", transactionSchema);
