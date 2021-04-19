@@ -2,46 +2,55 @@
   {
     "title": "art1",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://png.pngtree.com/png-clipart/20201214/ourmid/pngtree-couple-hands-line-art-valentines-special-fall-in-love-little-hearts-png-image_2558021.jpg"
   },
   {
     "title": "art2",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://w7.pngwing.com/pngs/923/551/png-transparent-watercolor-painting-art-colorful-leaves-watercolor-texture-computer-wallpaper-color-thumbnail.png"
   },
   {
     "title": "art3",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://cdn.imgbin.com/5/25/16/imgbin-watercolor-painting-splash-art-remodel-multicolored-illustration-9mwMWuhjNM2DJjtFpFRixD0bw.jpg"
   },
   {
     "title": "art5",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_9k7lDA0lgRH7iLQbPoioA4m0CXQlpSqL1g&usqp=CAU"
   },
   {
     "title": "art6",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://png.pngtree.com/png-clipart/20201214/ourmid/pngtree-couple-hands-line-art-valentines-special-fall-in-love-little-hearts-png-image_2558021.jpg"
   },
   {
     "title": "art7",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://w7.pngwing.com/pngs/923/551/png-transparent-watercolor-painting-art-colorful-leaves-watercolor-texture-computer-wallpaper-color-thumbnail.png"
   },
   {
     "title": "art8",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://cdn.imgbin.com/5/25/16/imgbin-watercolor-painting-splash-art-remodel-multicolored-illustration-9mwMWuhjNM2DJjtFpFRixD0bw.jpg"
   },
   {
     "title": "art9",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_9k7lDA0lgRH7iLQbPoioA4m0CXQlpSqL1g&usqp=CAU"
   },
   {
     "title": "art10",
     "price": 200000,
+    "description": "lorem ipsum lorem ipsum",
     "image_url": "https://png.pngtree.com/png-clipart/20201214/ourmid/pngtree-couple-hands-line-art-valentines-special-fall-in-love-little-hearts-png-image_2558021.jpg"
   }
 ]

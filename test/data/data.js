@@ -43,8 +43,22 @@ const arts = [
   },
 ];
 
+const transaction = {
+  arts: [
+    {
+      id: "",
+      type: "T-Shirt",
+      position: "200",
+      quantity: 2,
+    },
+  ],
+  gross_amount: 100000,
+  address: "Jakarta",
+};
+
 module.exports = {
   users,
   categories,
   arts,
+  transaction,
 };

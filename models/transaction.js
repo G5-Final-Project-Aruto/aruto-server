@@ -5,7 +5,15 @@ const transactionSchema = Schema({
     {
       id: {
         type: ObjectId,
-        ref: "Art",
+        required: true,
+      },
+      type: {
+        type: String,
+        required: true,
+      },
+      position: {
+        type: String,
+        required: true,
       },
       quantity: {
         type: Number,
