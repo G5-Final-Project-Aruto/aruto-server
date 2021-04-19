@@ -46,6 +46,7 @@ const createArts = (art, user, categories) => {
       .set("access_token", user.access_token)
       .field("title", art.title)
       .field("price", art.price)
+      .field("description", art.description)
       .field("categories", `${categories[0]._id}, ${categories[1]._id}`)
       .attach("image_url", fs.readFileSync(art.image_url), art.image_name)
       .end((err, res) => {

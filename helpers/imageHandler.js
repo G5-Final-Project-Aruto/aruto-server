@@ -49,6 +49,7 @@ const uploadImage = (req) => {
       const dataReturn = {
         title: fields.title,
         price: fields.price,
+        description: fields.description,
         categories: fields.categories,
       };
 

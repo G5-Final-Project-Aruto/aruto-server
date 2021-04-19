@@ -33,18 +33,14 @@ class Controller {
       const arts = await Art.find().populate("user").populate("categories");
       const dataArts = arts.map((art) => {
         return {
-          _id: art._id,
+          ...art._doc,
           user: {
             _id: art.user._id,
             username: art.user.username,
           },
-          title: art.title,
-          image_url: art.image_url,
-          price: art.price,
-          likes: art.likes.length,
-          categories: art.categories,
         };
       });
+
       res.status(200).json(dataArts);
     } catch (error) {
       next(error);
@@ -58,17 +54,13 @@ class Controller {
       })
         .populate("user")
         .populate("categories");
+
       res.status(200).json({
-        _id: art._id,
+        ...art._doc,
         user: {
           _id: art.user._id,
           username: art.user.username,
         },
-        title: art.title,
-        image_url: art.image_url,
-        price: art.price,
-        likes: art.likes.length,
-        categories: art.categories,
       });
     } catch (error) {
       next(error);
