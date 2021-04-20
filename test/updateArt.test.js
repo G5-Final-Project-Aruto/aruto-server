@@ -102,6 +102,7 @@ describe("Put /arts", () => {
         .field("title", "updatedArt")
         .field("price", 12)
         .field("categories", `${categoriesData[1]._id}`)
+        .field("latestUrl", artsCreated[0].image_url)
         .attach(
           "image_url",
           fs.readFileSync(arts[0].image_url),
@@ -160,6 +161,31 @@ describe("Put /arts", () => {
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("message");
           expect(res.body.message).to.equal("Please login first");
+          done();
+        });
+    });
+  });
+
+  describe("failed case with status code 404", () => {
+    it("should return error when art id not found in database", (done) => {
+      Chai.request(app)
+        .put(`/arts/qwerty123456`)
+        .set("access_token", usersData[1].access_token)
+        .field("title", "updatedArt")
+        .field("price", 12)
+        .field("categories", `${categoriesData[1]._id}`)
+        .field("latestUrl", artsCreated[0].image_url)
+        .attach(
+          "image_url",
+          fs.readFileSync(arts[0].image_url),
+          arts[0].image_name
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(404);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Art not found");
           done();
         });
     });

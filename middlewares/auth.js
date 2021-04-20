@@ -27,21 +27,7 @@ async function authorization(req, res, next) {
     next(error);
   }
 }
-async function authentication(req, res, next) {
-  try {
-    const user = await User.findOne({ _id: req.currentUser._id });
-
-    if (!user.arts.includes(req.params.id)) {
-      throw { name: "Unauthorize user" };
-    }
-
-    next();
-  } catch (error) {
-    next(error);
-  }
-}
 
 module.exports = {
   authorization,
-  authentication,
 };

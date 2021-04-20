@@ -4,7 +4,7 @@ const { ArtController } = require("../controllers");
 
 const router = Router();
 
-const { authorization, authentication } = require("../middlewares");
+const { authorization } = require("../middlewares");
 
 router.get("/", ArtController.getAllArt);
 router.get("/:id", ArtController.getOneArt);
@@ -12,8 +12,7 @@ router.get("/:id", ArtController.getOneArt);
 router.use(authorization);
 router.post("/", ArtController.createArt);
 router.patch("/:id/like", ArtController.likeArt);
-
-router.put("/:id", authentication, ArtController.updateArt);
-router.delete("/:id", authentication, ArtController.deleteArt);
+router.put("/:id", ArtController.updateArt);
+router.delete("/:id", ArtController.deleteArt);
 
 module.exports = router;
