@@ -50,9 +50,7 @@ class Controller {
 
   static async getOneArt(req, res, next) {
     try {
-      const art = await Art.findOne({
-        _id: req.params.id,
-      })
+      const art = await Art.findById(req.params.id)
         .populate("user")
         .populate("categories");
 
@@ -105,21 +103,25 @@ class Controller {
     }
   }
 
-  static async addLikeArt(req, res, next) {
+  static async likeArt(req, res, next) {
     try {
-      await Art.updateOne(
-        {
-          _id: req.params.id,
-        },
-        {
-          $push: {
-            likes: req.currentUser._id,
-          },
-        }
-      );
+      const art = await Art.findOne({ _id: req.params.id });
+
+      let type = "";
+      if (art.likes.includes(req.currentUser._id)) {
+        art.likes = art.likes.filter(
+          (userId) => `${userId}` !== `${req.currentUser._id}`
+        );
+        type = "disliked";
+      } else {
+        art.likes.push(req.currentUser._id);
+        type = "liked";
+      }
+
+      await art.save();
 
       res.status(200).json({
-        message: "Art has been liked",
+        message: `Art has been liked ${type}`,
       });
     } catch (error) {
       next(error);

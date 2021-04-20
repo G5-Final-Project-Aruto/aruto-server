@@ -1,5 +1,6 @@
 module.exports = (err, req, res, next) => {
   if (!err) return;
+  console.log(err);
 
   let error = {
     status: 500,
@@ -34,6 +35,7 @@ module.exports = (err, req, res, next) => {
       break;
     case "Please login first":
     case "Unauthorize user":
+    case "Invalid token":
       error = {
         ...error,
         status: 401,
