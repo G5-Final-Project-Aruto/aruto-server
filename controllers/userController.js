@@ -53,6 +53,8 @@ class Controller {
       const user = await User.findById({
         _id: req.currentUser._id,
       }).populate("arts");
+
+      delete user._doc.password;
       res.status(200).json(user);
     } catch (error) {
       next(error);

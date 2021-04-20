@@ -75,17 +75,13 @@ class TransactionController {
     }
   }
 
-  static async transactionHistory (req,res,next) {
+  static async transactionHistory(req, res, next) {
     try {
-      console.log('masuk')
-      const history = await Transaction.find(
-        {UserId: req.currentUser._id}
-      )
-      console.log(history,'ini history')
-      res.status(200).json(history)
+      const history = await Transaction.find({ UserId: req.currentUser._id });
+
+      res.status(200).json(history);
     } catch (err) {
-      console.log(err,'masuk error')
-      next(err)
+      next(err);
     }
   }
 }
