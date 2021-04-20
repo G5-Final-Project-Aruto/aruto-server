@@ -1,56 +1,134 @@
 [
   {
-    "title": "art1",
+    "title": "Answering the Call",
     "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://png.pngtree.com/png-clipart/20201214/ourmid/pngtree-couple-hands-line-art-valentines-special-fall-in-love-little-hearts-png-image_2558021.jpg"
+    "description": "Garden of Eden, in the Old Testament Book of Genesis, biblical earthly paradise inhabited by the first created man and woman, Adam and Eve, prior to their expulsion for disobeying the commandments of God. It is also called in Genesis the Garden of Yahweh, the God of Israel, and, in Ezekiel, the Garden of God. The term Eden probably is derived from the Akkadian word edinu, borrowed from the Sumerian eden, meaning “plain.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/07dc750c-cccf-4c46-b409-bc020b255a97/deglget-dbfcc633-35df-46b7-83e6-931257ed9fbd.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMDdkYzc1MGMtY2NjZi00YzQ2LWI0MDktYmMwMjBiMjU1YTk3XC9kZWdsZ2V0LWRiZmNjNjMzLTM1ZGYtNDZiNy04M2U2LTkzMTI1N2VkOWZiZC5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.7gB1Xpjmfw95OlrSN3Y-YiP9cKqNdQ3NwjLJBs7ZncQ"
   },
   {
-    "title": "art2",
-    "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://w7.pngwing.com/pngs/923/551/png-transparent-watercolor-painting-art-colorful-leaves-watercolor-texture-computer-wallpaper-color-thumbnail.png"
+    "title": "Inverted Forest",
+    "price": 150000,
+    "description": "I recently watched 'Made in Abyss: Dawn of the Deep Soul' for the first time and I fell in love once more with the amazing story and lovable characters of the Made in Abyss world. Made in Abyss is an adventure story about two kids descending down a deep and mysterious pit in search for the protagonist's mom, who got lost somewhere at the bottom of the pit. On their way down the two kids traverse several fantastic layers with all kinds of dangers and mysteries to uncover. The layer shown here is the 'Inverted Forest', an area where updrafts are so strong that forests grow upside-down and even water flows upwards. This allows the trees to be used as platforms to jump across the landscape.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/13570593-d036-4374-9dce-1e26c9c05170/dec4vyj-33bf47b7-37e0-4db3-90b7-3edee867d8e6.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMTM1NzA1OTMtZDAzNi00Mzc0LTlkY2UtMWUyNmM5YzA1MTcwXC9kZWM0dnlqLTMzYmY0N2I3LTM3ZTAtNGRiMy05MGI3LTNlZGVlODY3ZDhlNi5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.wI2-lBWrfK4Ne685AIqz7ygwzai208jIwyUkoIqOOaU"
   },
   {
-    "title": "art3",
-    "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://cdn.imgbin.com/5/25/16/imgbin-watercolor-painting-splash-art-remodel-multicolored-illustration-9mwMWuhjNM2DJjtFpFRixD0bw.jpg"
+    "title": "Sara Stanley Away",
+    "price": 100000,
+    "description": "Sara Stanley is only fourteen, but she can weave tales that are impossible to resist. In the charming town of Carlisle, children and grown-ups alike flock from miles around to hear her spellbinding tales. And when Bev King and his younger brother Felix arrive for the summer, they, too, are captivated by the Story Girl.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/07ebb6aa-9d49-4552-b4b2-8b8a4f084b1e/deg3pfe-00cd9e05-18de-4957-b42e-347859f23554.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMDdlYmI2YWEtOWQ0OS00NTUyLWI0YjItOGI4YTRmMDg0YjFlXC9kZWczcGZlLTAwY2Q5ZTA1LTE4ZGUtNDk1Ny1iNDJlLTM0Nzg1OWYyMzU1NC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.Dl9UOKZCyvICJTNv2DK8FQyetLBINtDZKLJt-zoOOyM"
   },
   {
-    "title": "art5",
-    "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_9k7lDA0lgRH7iLQbPoioA4m0CXQlpSqL1g&usqp=CAU"
+    "title": "Chinatown",
+    "price": 80000,
+    "description": "Yokohama Chinatown (Japanese: 横浜中華街, Hepburn: Yokohama chūkagai) is located in Yokohama, Japan, which is located just south of Tokyo. Its history is about 160 years long. Today, only a few Chinese people still live in Chinatown, but it has a population of about 3,000 to 4,000. Most of the residents are from Guangzhou (Canton), but many come from other regions.Yokohama Chinatown is the largest Chinatown in Japan (larger than Chinatowns in both Kobe and Nagasaki) and it is one of the largest in the world.[citation needed] There are roughly 250 Chinese-owned or themed shops and restaurants scattered throughout the district, with the highest concentration centered on a 300 m2 (3,200 sq ft) area.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/287eab66-0f73-4b97-8e74-849c5f06d542/deg4l2g-621368ad-b44b-44eb-ac47-47764083ba4f.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMjg3ZWFiNjYtMGY3My00Yjk3LThlNzQtODQ5YzVmMDZkNTQyXC9kZWc0bDJnLTYyMTM2OGFkLWI0NGItNDRlYi1hYzQ3LTQ3NzY0MDgzYmE0Zi5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.UhJwHno_hhw5n_QIoJo6EbIVXZXap6qfPNMHR0dm10g"
   },
   {
-    "title": "art6",
-    "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://png.pngtree.com/png-clipart/20201214/ourmid/pngtree-couple-hands-line-art-valentines-special-fall-in-love-little-hearts-png-image_2558021.jpg"
+    "title": "Keetie - Commision",
+    "price": 250000,
+    "description": "The cat deer is a four-legged mammal with the build of a deer and the facial characteristics of a cat. Its head and body are covered with predominantly light brown fur, while a significant portion of its underbelly and tail are white, alongside a notable white stripe on its large neck. The cat deer's retractable claws are sheathed in its white paws, and it has white fur growing on the toe pads. ",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ba94f1d6-4c8e-4299-b43c-5b12720600eb/dee3zd4-a20064da-1ff6-40b9-8c04-6c977a746961.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYmE5NGYxZDYtNGM4ZS00Mjk5LWI0M2MtNWIxMjcyMDYwMGViXC9kZWUzemQ0LWEyMDA2NGRhLTFmZjYtNDBiOS04YzA0LTZjOTc3YTc0Njk2MS5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.jImKBiXON6lRY-BdPHtRruR81_NFiwegQp5HOOIH2ZY"
   },
   {
-    "title": "art7",
-    "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://w7.pngwing.com/pngs/923/551/png-transparent-watercolor-painting-art-colorful-leaves-watercolor-texture-computer-wallpaper-color-thumbnail.png"
+    "title": "Majesty of Nature",
+    "price": 800000,
+    "description": "Nature, in the broadest sense, is the natural, physical, material world or universe. 'Nature' can refer to the phenomena of the physical world, and also to life in general. The study of nature is a large, if not the only, part of science. Although humans are part of nature, human activity is often understood as a separate category from other natural phenomena.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/880f701d-500e-465c-8f20-8a236ac036d3/defi73j-3bf0aff2-5db2-4f25-bcd2-12177754926d.png/v1/fill/w_1280,h_746,q_80,strp/majesty_of_nature_by_ferrohanc_defi73j-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD03NDYiLCJwYXRoIjoiXC9mXC84ODBmNzAxZC01MDBlLTQ2NWMtOGYyMC04YTIzNmFjMDM2ZDNcL2RlZmk3M2otM2JmMGFmZjItNWRiMi00ZjI1LWJjZDItMTIxNzc3NTQ5MjZkLnBuZyIsIndpZHRoIjoiPD0xMjgwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.c1hL1PsM7UC2rr4IZmhLzrHi6pHy5gNLMBQX42sGSxI"
   },
   {
-    "title": "art8",
-    "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://cdn.imgbin.com/5/25/16/imgbin-watercolor-painting-splash-art-remodel-multicolored-illustration-9mwMWuhjNM2DJjtFpFRixD0bw.jpg"
+    "title": "The Mouse Goes On a Journey",
+    "price": 50000,
+    "description": "I recently took interesting courses in Smirnov School. This is the final work. ",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2abc5a8d-58e0-4913-a8a5-1d067c864b26/def7r6f-121c0738-5e53-488a-ad7a-fd5c1246c62e.jpg/v1/fill/w_900,h_507,q_75,strp/the_mouse_goes_on_a_journey_by_katevoynova_def7r6f-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD01MDciLCJwYXRoIjoiXC9mXC8yYWJjNWE4ZC01OGUwLTQ5MTMtYThhNS0xZDA2N2M4NjRiMjZcL2RlZjdyNmYtMTIxYzA3MzgtNWU1My00ODhhLWFkN2EtZmQ1YzEyNDZjNjJlLmpwZyIsIndpZHRoIjoiPD05MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.0aWugs4tupk0YgfF4RkE9ZwZFU21utZhHSft54tdi4c"
   },
   {
-    "title": "art9",
-    "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_9k7lDA0lgRH7iLQbPoioA4m0CXQlpSqL1g&usqp=CAU"
+    "title": "Old Soul",
+    "price": 165000,
+    "description": "Are you a curious, wise, or all-around calm person? You might just be an old soul. Whether you've been called it before or always had a feeling you were, what does being an old soul really mean? Here, we dive into the true meaning, plus, the signs to look out for that you could be an old soul.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/45f14695-261e-46ea-ab7f-f6375fe6d5d6/deh3z4h-58c48fad-2fc2-4c2d-b062-506a1f6cc1be.jpg/v1/fill/w_1024,h_663,q_75,strp/old_soul_by_jayalamart_deh3z4h-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD02NjMiLCJwYXRoIjoiXC9mXC80NWYxNDY5NS0yNjFlLTQ2ZWEtYWI3Zi1mNjM3NWZlNmQ1ZDZcL2RlaDN6NGgtNThjNDhmYWQtMmZjMi00YzJkLWIwNjItNTA2YTFmNmNjMWJlLmpwZyIsIndpZHRoIjoiPD0xMDI0In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.AzmHpbFtW8XwSBFHfo-4qdUWSNfQ_hpOvGj_-QFw5HM"
   },
   {
-    "title": "art10",
-    "price": 200000,
-    "description": "lorem ipsum lorem ipsum",
-    "image_url": "https://png.pngtree.com/png-clipart/20201214/ourmid/pngtree-couple-hands-line-art-valentines-special-fall-in-love-little-hearts-png-image_2558021.jpg"
+    "title": "Downpour",
+    "price": 18500,
+    "description": "You don't have to dwell on your past to experience joy and pride. Happiness should be perpetual. And it's very easy to have it that way.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3ff82c90-8856-476b-9eb7-745ebb3dd269/deel5d5-1dbffa7d-c326-46d4-bf84-60a680999036.jpg/v1/fill/w_1024,h_1280,q_75,strp/downpour_by_hayleemorice_deel5d5-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMjgwIiwicGF0aCI6IlwvZlwvM2ZmODJjOTAtODg1Ni00NzZiLTllYjctNzQ1ZWJiM2RkMjY5XC9kZWVsNWQ1LTFkYmZmYTdkLWMzMjYtNDZkNC1iZjg0LTYwYTY4MDk5OTAzNi5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.oV5B7Uvcp-41GRY8iscNojVv6sKfzCpt5s8Ef2GKJSg"
+  },
+  {
+    "title": "Kuramori Departs",
+    "price": 25000,
+    "description": "A commission I got the chance to work on this past month. My favorite commission I've worked on so far. It's about Depressing Soul",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3ff82c90-8856-476b-9eb7-745ebb3dd269/ddsmyy1-3afcddc4-f7a5-4229-aaca-79da11750645.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvM2ZmODJjOTAtODg1Ni00NzZiLTllYjctNzQ1ZWJiM2RkMjY5XC9kZHNteXkxLTNhZmNkZGM0LWY3YTUtNDIyOS1hYWNhLTc5ZGExMTc1MDY0NS5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.9AhOxJdVNzinDQtYcEtvW3XDr7Fa-jYZsL8SkfxlLrQ"
+  },
+  {
+    "title": "Good Omens Aziraphale and Crowley Art",
+    "price": 23000,
+    "description": "Aziraphale is looking to prevent the apocalypse because he enjoys humans and he likes his life on Earth. There are restaurants on here, for a start. Furthermore, he does not find the idea of listening to The Sound of Music for eternity very appealing. He is Crowley’s boyfriend, formerly best friend.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/615f20df-7069-41db-bdd6-30669417332c/degczjt-c8a69ca5-b095-448d-848b-cdccd8358d2a.jpg/v1/fill/w_800,h_600,q_75,strp/good_omens_aziraphale_and_crowley_art_by_yellowsalamanderart_degczjt-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD02MDAiLCJwYXRoIjoiXC9mXC82MTVmMjBkZi03MDY5LTQxZGItYmRkNi0zMDY2OTQxNzMzMmNcL2RlZ2N6anQtYzhhNjljYTUtYjA5NS00NDhkLTg0OGItY2RjY2Q4MzU4ZDJhLmpwZyIsIndpZHRoIjoiPD04MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.4XbdWRv4InfKhicMZCDZy4B6KhEXVBgWQtUZx3c-pUU"
+  },
+  {
+    "title": "KDA - Pop/Stars",
+    "price": 100000,
+    "description": "K/DA consists of four virtual characters, whose vocals were provided by Soyeon and Miyeon from (G)I-dle, Madison Beer and Jaira Burns. 'Pop/Stars' has a length of three minutes and eleven seconds and a tempo of 170 beats per minute. It is a bilingual song, featuring vocals in English by Beer and Burns, and in both English and Korean by Soyeon and Miyeon. The song was composed by Sébastien Najand.",
+    "image_url": "https://i.pinimg.com/originals/1d/02/2e/1d022ee3c812a9539cb6922000ec9cd9.png"
+  },
+  {
+    "title": "KDA - All Out",
+    "price": 150000,
+    "description": "All Out (stylized in all caps) is the first extended play by virtual girl group K/DA. The EP was released on November 6, 2020, through Riot Games and Stone Music Entertainment. The album contains five songs which feature vocals from the original line-up (G)I-dle, Madison Beer, and Jaira Burns plus a variety of influential singers, such as Bea Miller, Wolftyla, Lexie Liu, Kim Petras, Aluna, Bekuh Boom, TWICE, and Annika Wells. Each song was produced by one of the fictional members of the group",
+    "image_url": "https://i.pinimg.com/originals/20/74/6a/20746abd5376e2fc48c16de5b22b8f75.jpg"
+  },
+  {
+    "title": "Chaos",
+    "price": 150000,
+    "description": "Finally, after the horribly impact of Covid-19 pandemic, I have a few of times to relax my myself with a study piece. Let's call it 'chaos'. Hopefully, this small illustration will help you guys relaxing a little bit in and out of this turbulent time. ❤",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/92eef7a7-0df4-465a-becb-e1191ffb2102/de45umt-000e2868-fdab-4474-9a8d-5d6b12af7f82.jpg/v1/fill/w_1280,h_1763,q_75,strp/chaos_by_nkartistt_de45umt-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xNzYzIiwicGF0aCI6IlwvZlwvOTJlZWY3YTctMGRmNC00NjVhLWJlY2ItZTExOTFmZmIyMTAyXC9kZTQ1dW10LTAwMGUyODY4LWZkYWItNDQ3NC05YThkLTVkNmIxMmFmN2Y4Mi5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.Xj_i3mOlM_jueJ_n5GBd0VV9y8HDD6ZpzocdR12CTME"
+  },
+  {
+    "title": "Asian Women",
+    "price": 20000,
+    "description": "Finished commission for #al*** 🤟🤟 Thanks a lot for her support 🤝 How do you feel about my piece ? Hopefully, this small illustration will help you guys relaxing a little bit in and out of this turbulent time. ❤",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/92eef7a7-0df4-465a-becb-e1191ffb2102/ddr5p7v-771bb65f-26d0-4b5a-bd9a-fd4e934a732f.jpg/v1/fill/w_1280,h_1947,q_75,strp/asianwomen_by_nkartistt_ddr5p7v-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xOTQ3IiwicGF0aCI6IlwvZlwvOTJlZWY3YTctMGRmNC00NjVhLWJlY2ItZTExOTFmZmIyMTAyXC9kZHI1cDd2LTc3MWJiNjVmLTI2ZDAtNGI1YS1iZDlhLWZkNGU5MzRhNzMyZi5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.yjj9LVQgCK7_6sjfg3e--C0PC7zYId5gM0WMbAJSygA"
+  },
+  {
+    "title": "Lady Of The Light",
+    "price": 80000,
+    "description": "War with the neighboring country of Scanra is declared at last, and Kel finds herself in charge of a refugee camp. Her district commander, Lord Wyldon, has chosen not to place her in control of a border post or a portion of the army like the other knights, so she's certain that he wishes to keep her—who, as a woman, he views as inferior in combat to males—out of fighting. However, it is revealed that she was chosen for her post because she is the only knight Wyldon knows who wouldn't discriminate against those not of noble blood. Kel soon comes to realize that these refugees, torn from their homes, robbed of their wealth and self-respect, are her responsibility. She must feed them, house them, and keep them safe from harm far too close to the Scanran border. She is able to be a hero, even outside of the battlefield.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/516b9e9b-d50f-45d7-941f-19aad8374759/dd5ztvg-677c7820-1eaf-4273-bfce-df859577ff4b.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvNTE2YjllOWItZDUwZi00NWQ3LTk0MWYtMTlhYWQ4Mzc0NzU5XC9kZDV6dHZnLTY3N2M3ODIwLTFlYWYtNDI3My1iZmNlLWRmODU5NTc3ZmY0Yi5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.jI9WStO8q2v6lU4256d8iFfo6wEpiv_jGXdeJg-aRwI"
+  },
+  {
+    "title": "Ironman Watercolor",
+    "price": 75000,
+    "description": "Iron Man is a fictional superhero appearing in American comic books published by Marvel Comics. The character was co-created by writer and editor Stan Lee, developed by scripter Larry Lieber, and designed by artists Don Heck and Jack Kirby. The character made his first appearance in Tales of Suspense #39 (cover dated March 1963), and received his own title in Iron Man #1 (May 1968). Also in 1963, the character founded the Avengers alongside Thor, Ant-Man, Wasp and the Hulk.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/615f20df-7069-41db-bdd6-30669417332c/dehrrje-b9d24fe2-cf0d-48cf-a146-98cbf54bf980.jpg/v1/fill/w_800,h_1067,q_75,strp/ironman_watercolor_by_yellowsalamanderart_dehrrje-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDY3IiwicGF0aCI6IlwvZlwvNjE1ZjIwZGYtNzA2OS00MWRiLWJkZDYtMzA2Njk0MTczMzJjXC9kZWhycmplLWI5ZDI0ZmUyLWNmMGQtNDhjZi1hMTQ2LTk4Y2JmNTRiZjk4MC5qcGciLCJ3aWR0aCI6Ijw9ODAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.KeezSGgfMBUK42NrjNrRjyxfhU618sjxS_tg8YM-1UE"
+  },
+  {
+    "title": "Morning Sun",
+    "price": 75000,
+    "description": "The early morning sunlight, soft and diffuse, gives way to the first strong rays of the day, the ones that bring true warmth. In this light, water evaporates in slow waves, waves that eddy in the gentle breeze, flowing upward to white-puffed clouds, ships of white in the blue above.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/664790b7-b1ef-46f8-9590-a98c3b248bf1/debjf6d-fa2c5d6a-a3f8-416f-8b1f-2a54275377e1.png/v1/fill/w_900,h_900,q_80,strp/1_2_21_by_butterflyblew_debjf6d-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD05MDAiLCJwYXRoIjoiXC9mXC82NjQ3OTBiNy1iMWVmLTQ2ZjgtOTU5MC1hOThjM2IyNDhiZjFcL2RlYmpmNmQtZmEyYzVkNmEtYTNmOC00MTZmLThiMWYtMmE1NDI3NTM3N2UxLnBuZyIsIndpZHRoIjoiPD05MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.xR2e2XyrRF4qwjmBv5sGYwciCH0-_OP5azE_UIfrwq8"
+  },
+  {
+    "title": "Tifa By Mattikarp",
+    "price": 95000,
+    "description": "A member of the anti-Shinra militant group Avalanche. Tifa manages Seventh Heaven, a bar located in the Sector 7 slums. A student of Zangan-style martial arts, she can clobber opponents with her fleet-footed combat techniques.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/073d5f27-510e-4c36-b292-866102316587/ddx06en-76bd2a68-c78d-4c63-9da3-d54f50601380.jpg/v1/fill/w_1024,h_1795,q_75,strp/tifa_by_mattikarp_ddx06en-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xNzk1IiwicGF0aCI6IlwvZlwvMDczZDVmMjctNTEwZS00YzM2LWIyOTItODY2MTAyMzE2NTg3XC9kZHgwNmVuLTc2YmQyYTY4LWM3OGQtNGM2My05ZGEzLWQ1NGY1MDYwMTM4MC5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.Je2Z-qeB1rr3oh_lFtmUq2nmj77ky8y7OI9owbP6hjU"
+  },
+  {
+    "title": "Aerith By Mattikarp",
+    "price": 95000,
+    "description": "A flower peddler living in the Sector 5 slums, Aerith has been under Shinra surveillance all her life because of her unique background. Capable of sensing the planet's life force, she offers magical support to her comrades.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/073d5f27-510e-4c36-b292-866102316587/ddxvvb8-ae4456d4-e1e5-4446-a146-48ba7ea4e670.jpg/v1/fill/w_1024,h_1781,q_75,strp/aerith_by_mattikarp_ddxvvb8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xNzgxIiwicGF0aCI6IlwvZlwvMDczZDVmMjctNTEwZS00YzM2LWIyOTItODY2MTAyMzE2NTg3XC9kZHh2dmI4LWFlNDQ1NmQ0LWUxZTUtNDQ0Ni1hMTQ2LTQ4YmE3ZWE0ZTY3MC5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.A3FhQAOasLZObF4ypwFEdl5F0Vy-ZpPXO9DwS727qG0"
+  },
+  {
+    "title": "YoRHa Type A - A2",
+    "price": 100000,
+    "description": "YoRHa Type A (Attacker) No.2 or A2 serves as the protagonist of Branch C in NieR:Automata, as well as the final boss in Branch D. She is also a major character in the YoRHa Stage Play.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/073d5f27-510e-4c36-b292-866102316587/ddthydd-0e2e2a23-e4ef-40e3-9d1d-b2a40b94e369.jpg/v1/fill/w_1280,h_1280,q_75,strp/a2_by_mattikarp_ddthydd-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMjgwIiwicGF0aCI6IlwvZlwvMDczZDVmMjctNTEwZS00YzM2LWIyOTItODY2MTAyMzE2NTg3XC9kZHRoeWRkLTBlMmUyYTIzLWU0ZWYtNDBlMy05ZDFkLWIyYTQwYjk0ZTM2OS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.6vdLA3dqnu8DcFFQlNJXWy2JA2z_AIpegSMmuZ0VFoU"
+  },
+  {
+    "title": "YoRHa Type B - 2B",
+    "price": 100000,
+    "description": "YoRHa No.2 Type B (Battle) or 2B serves as the protagonist of Route A in NieR:Automata. She is a YoRHa android created to battle the machine lifeforms that have invaded the planet on behalf of the surviving humans. She served during the 14th Machine War.",
+    "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/073d5f27-510e-4c36-b292-866102316587/ddu02dx-98b8d61d-0fbd-4590-8b2a-b4ec699e4bba.jpg/v1/fill/w_1024,h_1288,q_75,strp/2b_by_mattikarp_ddu02dx-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMjg4IiwicGF0aCI6IlwvZlwvMDczZDVmMjctNTEwZS00YzM2LWIyOTItODY2MTAyMzE2NTg3XC9kZHUwMmR4LTk4YjhkNjFkLTBmYmQtNDU5MC04YjJhLWI0ZWM2OTllNGJiYS5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.cTc73VKlIDpOQjU9bJb8HjfS1RyKfQMYfyyu-LYPSHk"
   }
 ]

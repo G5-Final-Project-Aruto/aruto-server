@@ -4,7 +4,7 @@ const { Art, User,Category } = require('../models')
 const arts = JSON.parse(fs.readFileSync('./data/arts.json', 'utf-8'))
 
 let user = {
-  "username": "admin",
+  "username": "AdamantineArt",
   "email": "admin@mail.com",
   "password": 12345,
   "full_name": "rio dicky",
