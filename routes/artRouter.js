@@ -11,7 +11,7 @@ router.get("/:id", ArtController.getOneArt);
 
 router.use(authorization);
 router.post("/", ArtController.createArt);
-router.patch("/:id/like", ArtController.addLikeArt);
+router.patch("/:id/like", ArtController.likeArt);
 
 router.put("/:id", authentication, ArtController.updateArt);
 router.delete("/:id", authentication, ArtController.deleteArt);

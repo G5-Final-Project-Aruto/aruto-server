@@ -1,4 +1,4 @@
-const { User, Art } = require("../models");
+const { User } = require("../models");
 const { verifyToken } = require("../helpers");
 
 async function authorization(req, res, next) {
@@ -8,17 +8,21 @@ async function authorization(req, res, next) {
     }
 
     const user = verifyToken(req.headers.access_token);
-    if (user._id && user.email) {
-      const dataUser = await User.findById({
-        _id: user._id,
-      });
-      if (dataUser.email === user.email) {
-        req.currentUser = dataUser;
-        next();
-      } else {
-        throw { name: "user not found" };
-      }
+
+    if (!user._id || !user.email) {
+      throw { name: "Invalid token" };
     }
+
+    const dataUser = await User.findOne({
+      _id: user._id,
+    });
+
+    if (!dataUser || dataUser.email !== user.email) {
+      throw { name: "Invalid token" };
+    }
+
+    req.currentUser = dataUser;
+    next();
   } catch (error) {
     next(error);
   }
