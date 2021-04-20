@@ -121,7 +121,7 @@ class Controller {
       await art.save();
 
       res.status(200).json({
-        message: `Art has been liked ${type}`,
+        message: `Art has been ${type}`,
       });
     } catch (error) {
       next(error);

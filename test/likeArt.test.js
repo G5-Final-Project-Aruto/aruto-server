@@ -108,6 +108,20 @@ describe("Put /arts", () => {
           done();
         });
     });
+
+    it("should return response with status code 200 when success dislike art", (done) => {
+      Chai.request(app)
+        .patch(`/arts/${artsCreated[0]._id}/like`)
+        .set("access_token", usersData[0].access_token)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Art has been disliked");
+          done();
+        });
+    });
   });
 
   describe("failed case with status code 401", () => {
