@@ -41,6 +41,7 @@ class Controller {
         email: user.email,
       };
       const access_token = getToken(payload);
+
       res.status(200).json({ ...payload, access_token });
     } catch (err) {
       next(err);
@@ -50,11 +51,11 @@ class Controller {
   static async getUser(req, res, next) {
     try {
       const user = await User.findById({
-        _id: req.currentUser._id
-      }).populate('arts')
-      res.status(200).json(user)
+        _id: req.currentUser._id,
+      }).populate("arts");
+      res.status(200).json(user);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }

@@ -29,7 +29,9 @@ const userSchema = Schema({
 });
 
 userSchema.pre("save", function (next) {
-  this.password = hashPassword(this.password);
+  if (this.password.length < 15) {
+    this.password = hashPassword(this.password);
+  }
   next();
 });
 
