@@ -23,7 +23,6 @@ class Controller {
 
       res.status(201).json(art);
     } catch (error) {
-      console.log(error);
       if (artId !== "") await Art.deleteOne({ _id: artId });
       if (image_url !== "") await deleteImage(image_url);
       next(error);

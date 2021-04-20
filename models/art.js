@@ -15,7 +15,7 @@ const artSchema = Schema({
   },
   price: {
     type: Number,
-    required: true,
+    min: [1, "Price is required"],
   },
   user: {
     type: ObjectId,

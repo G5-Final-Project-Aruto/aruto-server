@@ -116,7 +116,7 @@ describe("Post /arts", () => {
         });
     });
 
-    it("should return error when price is null", (done) => {
+    it("should return error when price is 0", (done) => {
       Chai.request(app)
         .post("/arts")
         .set("access_token", userData.access_token)
@@ -137,9 +137,7 @@ describe("Post /arts", () => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("message");
-          expect(res.body.message).to.equal(
-            "Art validation failed: price: Path `price` is required."
-          );
+          expect(res.body.message).to.contain("Price is required");
           done();
         });
     });

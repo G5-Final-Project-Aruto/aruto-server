@@ -6,7 +6,8 @@
   "scripts": {
     "seed": "cross-env NODE_ENV=development node seed",
     "test": "cross-env NODE_ENV=test npx mocha --exit --trace-deprecation",
-    "dev": "cross-env NODE_ENV=development npx nodemon bin/http.js "
+    "dev": "cross-env NODE_ENV=development npx nodemon bin/http.js",
+    "coverage": "cross-env NODE_ENV=test npx nyc mocha"
   },
   "repository": {
     "type": "git",
