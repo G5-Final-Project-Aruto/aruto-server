@@ -87,7 +87,7 @@ describe("Get /arts", () => {
       .catch((err) => console.log(err));
   });
 
-  describe("succes case get", () => {
+  describe("succes case", () => {
     it("should return response with status code 200 when get all arts", (done) => {
       Chai.request(app)
         .get("/arts")
@@ -122,6 +122,21 @@ describe("Get /arts", () => {
           expect(res.body).to.have.property("likes");
           expect(res.body).to.have.property("categories");
           expect(res.body.categories).to.be.an("array");
+          done();
+        });
+    });
+  });
+
+  describe("failed case with status code 404", () => {
+    it("should return response error get one arts but id not found", (done) => {
+      Chai.request(app)
+        .get(`/arts/qwerty123456`)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(404);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.be.equal("Art not found");
           done();
         });
     });

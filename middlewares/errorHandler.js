@@ -1,6 +1,4 @@
 module.exports = (err, req, res, next) => {
-  if (!err) return;
-
   let error = {
     status: 500,
     message: "Internal Server Error",
@@ -42,13 +40,12 @@ module.exports = (err, req, res, next) => {
       };
       break;
     case "Transaction is not found":
+    case "Art not found":
       error = {
         ...error,
         status: 404,
         message: err.name,
       };
-      break;
-    default:
       break;
   }
 

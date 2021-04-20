@@ -54,6 +54,10 @@ class Controller {
         .populate("user")
         .populate("categories");
 
+      if (!art) {
+        throw { name: "Art not found" };
+      }
+
       res.status(200).json({
         ...art._doc,
         user: {
@@ -68,6 +72,16 @@ class Controller {
 
   static async deleteArt(req, res, next) {
     try {
+      const art = await Art.findById(req.params.id);
+
+      if (!art) {
+        throw { name: "Art not found" };
+      }
+
+      if (`${art.user}` !== `${req.currentUser._id}`) {
+        throw { name: "Unauthorize user" };
+      }
+
       await Art.deleteOne({
         _id: req.params.id,
       });
@@ -81,6 +95,16 @@ class Controller {
   static async updateArt(req, res, next) {
     let image_url = "";
     try {
+      const art = await Art.findById(req.params.id);
+
+      if (!art) {
+        throw { name: "Art not found" };
+      }
+
+      if (`${art.user}` !== `${req.currentUser._id}`) {
+        throw { name: "Unauthorize user" };
+      }
+
       const data = await uploadImage(req);
       image_url = data.image_url;
 
@@ -98,7 +122,7 @@ class Controller {
 
       res.status(200).json({ message: "Art has been updated" });
     } catch (error) {
-      if (image_url !== "") await deleteImage(image_url);
+      if (image_url !== "") await deleteImage(image_url); // branch
       next(error);
     }
   }

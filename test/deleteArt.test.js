@@ -136,4 +136,20 @@ describe("Delete /arts", () => {
         });
     });
   });
+
+  describe("failed case with status code 404", () => {
+    it("should return error when art id not found in database", (done) => {
+      Chai.request(app)
+        .delete(`/arts/qwerty123456`)
+        .set("access_token", usersData[1].access_token)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(404);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Art not found");
+          done();
+        });
+    });
+  });
 });

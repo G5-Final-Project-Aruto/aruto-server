@@ -6,7 +6,7 @@ const fs = require("fs");
 const app = require("../app");
 const { Art, User, Category } = require("../models");
 const { arts, users, categories } = require("./data/data");
-const { deleteImage } = require("../helpers");
+const { deleteImage, getToken } = require("../helpers");
 
 Chai.use(chaiHttp);
 
@@ -53,6 +53,19 @@ const createArts = (art, user, categories) => {
         if (err) reject(err);
         resolve(res.body);
       });
+  });
+};
+
+const ilegalUser = () => {
+  return getToken({
+    username: "inzaghi",
+  });
+};
+
+const ilegalUserIdEmail = () => {
+  return getToken({
+    _id: `qwerty123456`,
+    username: "syahrialrangga11@gmail.com",
   });
 };
 
@@ -134,6 +147,34 @@ describe("Put /arts", () => {
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("message");
           expect(res.body.message).to.equal("Please login first");
+          done();
+        });
+    });
+
+    it("should return error when user data not found in database", (done) => {
+      Chai.request(app)
+        .patch(`/arts/${artsCreated[0]._id}/like`)
+        .set("access_token", ilegalUser())
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Invalid token");
+          done();
+        });
+    });
+
+    it("should return error when user data's email is wrong", (done) => {
+      Chai.request(app)
+        .patch(`/arts/${artsCreated[0]._id}/like`)
+        .set("access_token", ilegalUserIdEmail())
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Invalid token");
           done();
         });
     });
