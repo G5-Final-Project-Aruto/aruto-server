@@ -43,6 +43,7 @@ describe("Post /login", () => {
           expect(res.body).to.have.property("_id");
           expect(res.body).to.have.property("email");
           expect(res.body.email).to.equal(registerUserTest.email);
+          expect(res.body).to.have.property("full_name");
           expect(res.body).to.have.property("access_token");
           done();
         });

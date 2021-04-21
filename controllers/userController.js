@@ -42,7 +42,9 @@ class Controller {
       };
       const access_token = getToken(payload);
 
-      res.status(200).json({ ...payload, access_token });
+      res
+        .status(200)
+        .json({ ...payload, full_name: user.full_name, access_token });
     } catch (err) {
       next(err);
     }
