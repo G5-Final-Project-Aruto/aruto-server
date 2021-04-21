@@ -1,44 +1,37 @@
 const fs = require('fs')
 const { Art, User,Category } = require('../models')
+const updateUserSeeder = require('./updateUserSeeder')
 
 const arts = JSON.parse(fs.readFileSync('./data/arts.json', 'utf-8'))
 
-let user = {
-  "username": "AdamantineArt",
-  "email": "admin@mail.com",
-  "password": 12345,
-  "full_name": "rio dicky",
-  "art": []
-}
+
 function seedArts() {
-  let userId = ''
-  User.create(user)
+  let users
+  User.find({})
     .then(data => {
-      console.log(data, "baris 17")
-      userId = data._id
+      users = data
       return Category.find({})
     })
     .then((data) => {    
-      console.log(data, "baris 22")
-      console.log(userId)
       arts.forEach(art => {
-        art.user = userId
-        art.categories = data
+        art.user = users[Math.floor(Math.random()*users.length)]
+        art.categories = [data[Math.floor(Math.random()*data.length)]]
       })
-      console.log(arts)
       return Art.insertMany(arts)
     })
-    .then((dataArts) => {
-      console.log(dataArts, "baris 30")
-      return User.update({
-        _id: userId
-      },{
-        $set: {
-          arts: dataArts
-        }
-      })
+    // .then((dataArts) => {
+    //   console.log(dataArts, "baris 30")
+    //   return User.update({
+    //     _id: users
+    //   },{
+    //     $set: {
+    //       arts: dataArts
+    //     }
+    //   })
+    // })
+    .then(data => {
+      updateUserSeeder()
     })
-    .then(data => console.log(data))
     .catch((err) => console.log(err))
 }
 module.exports = seedArts
