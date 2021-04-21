@@ -5,8 +5,8 @@ const { Transaction } = require("../models");
 
 const snap = new midtransClient.Snap({
   isProduction: false,
-  serverKey: "SB-Mid-server-OC-CpMu5lkZ2JT7mMyfnvDf0",
-  clientKey: "SB-Mid-client-kOg3pJdjMxNkUPCY",
+  serverKey: process.env.MIDTRANS_SERVER_KEY,
+  clientKey: process.env.MIDTRANS_CLIENT_KEY,
 });
 
 class TransactionController {

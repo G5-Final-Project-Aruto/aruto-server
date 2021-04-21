@@ -1,37 +1,16 @@
 [
   {
-    "username": "rio",
-    "email": "rio@mail.com",
+    "username": "MuskToMars",
+    "email": "elonmusk@mail.com",
     "password": 12345,
-    "full_name": "rio dicky",
+    "full_name": "Elon Musk",
     "art": []
   },
   {
-    "username": "harits",
-    "email": "harits@mail.com",
+    "username": "Picasso",
+    "email": "picasso@mail.com",
     "password": 12345,
-    "full_name": "harits menida",
-    "art": []
-  },
-  {
-    "username": "rangga",
-    "email": "rangga@mail.com",
-    "password": 12345,
-    "full_name": "rangga syarial",
-    "art": []
-  },
-  {
-    "username": "robby",
-    "email": "robby@mail.com",
-    "password": 12345,
-    "full_name": "robby benta",
-    "art": []
-  },
-  {
-    "username": "naufal",
-    "email": "naufal@mail.com",
-    "password": 12345,
-    "full_name": "naufal",
+    "full_name": "Pablo Picasso",
     "art": []
   }
 ]

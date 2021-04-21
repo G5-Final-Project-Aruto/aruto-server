@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "seed": "cross-env NODE_ENV=development node seed",
-    "test": "cross-env NODE_ENV=test npx mocha --exit --trace-deprecation",
     "dev": "cross-env NODE_ENV=development npx nodemon bin/http.js",
-    "coverage": "cross-env NODE_ENV=test npx nyc mocha"
+    "test": "cross-env NODE_ENV=test npx mocha --exit --trace-deprecation",
+    "coverage": "cross-env NODE_ENV=test npx nyc mocha --exit"
   },
   "repository": {
     "type": "git",
