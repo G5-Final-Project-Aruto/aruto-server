@@ -7,7 +7,8 @@
     "seed": "cross-env NODE_ENV=development node seed",
     "dev": "cross-env NODE_ENV=development npx nodemon bin/http.js",
     "test": "cross-env NODE_ENV=test npx mocha --exit --trace-deprecation",
-    "coverage": "cross-env NODE_ENV=test npx nyc mocha --exit"
+    "coverage": "cross-env NODE_ENV=test npx nyc mocha --exit",
+    "start": "node bin/http.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "busboy": "^0.3.1",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "firebase-admin": "^9.6.0",
     "jest": "^26.6.3",
@@ -39,7 +41,6 @@
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "cross-env": "^7.0.3",
-    "dotenv": "^8.2.0",
     "mocha": "^8.3.2",
     "nodemon": "^2.0.7"
   }
