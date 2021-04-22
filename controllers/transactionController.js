@@ -26,7 +26,7 @@ class TransactionController {
 
       await Transaction.create(newTransaction);
 
-      const transactionUrl = await snap.createTransactionRedirectUrl({
+      const transactionToken = await snap.createTransactionToken({
         transaction_details: {
           order_id: orderId,
           gross_amount,
@@ -34,7 +34,7 @@ class TransactionController {
         enabled_payments: ["credit_card"],
       });
 
-      res.status(201).json({ transactionUrl });
+      res.status(201).json({ transactionToken });
     } catch (err) {
       next(err);
     }
