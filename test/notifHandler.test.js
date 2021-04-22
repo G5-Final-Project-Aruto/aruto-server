@@ -69,7 +69,13 @@ const createTransaction = (transaction, user) => {
   });
 };
 
-describe("Post /transaction/success", () => {
+let mockNotification = {
+  order_id: "",
+  fraud_status: "accept",
+  transaction_status: "capture",
+};
+
+describe("Post /transaction/handler", () => {
   before((done) => {
     Category.insertMany(categories)
       .then((data) => {
@@ -95,8 +101,23 @@ describe("Post /transaction/success", () => {
           createTransaction(transactions[1], usersData[0]),
         ]);
       })
+      .then(() => {
+        return new Promise((resolve, reject) => {
+          Chai.request(app)
+            .get("/transaction/history")
+            .set("access_token", usersData[0].access_token)
+            .end((err, res) => {
+              if (err) reject(err);
+              resolve(res.body);
+            });
+        });
+      })
       .then((data) => {
         transactionsData = data;
+        mockNotification = {
+          ...mockNotification,
+          order_id: transactionsData[0].orderId,
+        };
         done();
       })
       .catch((err) => console.log(err));
@@ -117,81 +138,108 @@ describe("Post /transaction/success", () => {
   });
 
   describe("succes case", () => {
-    it("should return response with status code 200", (done) => {
+    it("should return response with status code 200 and message success if response is capture / settlement", (done) => {
       Chai.request(app)
-        .post("/transaction/success")
-        .set("access_token", usersData[0].access_token)
-        .send({ transactionId: transactionsData[0].transactionId })
+        .post("/transaction/handler")
+        .send(mockNotification)
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("message");
-          expect(res.body.message).to.equal("Payment succesfully");
+          expect(res.body.message).to.equal("Transaction is success");
+          done();
+        });
+    });
+
+    it("should return response with status code 200 and message pending if response is pending", (done) => {
+      Chai.request(app)
+        .post("/transaction/handler")
+        .send({
+          ...mockNotification,
+          order_id: transactionsData[1].orderId,
+          transaction_status: "pending",
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Transaction is pending");
+          done();
+        });
+    });
+
+    it("should return response with status code 200 and message failed if response is cancel / expire", (done) => {
+      Chai.request(app)
+        .post("/transaction/handler")
+        .send({
+          ...mockNotification,
+          order_id: transactionsData[1].orderId,
+          transaction_status: "cancel",
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.have.property("message");
+          expect(res.body.message).to.equal("Transaction is failed");
           done();
         });
     });
   });
 
   describe("failed case, with 400 status code", () => {
-    it(`should return error when transactionId is null`, function (done) {
+    it(`should return error when transaction already processed before`, function (done) {
       Chai.request(app)
-        .post("/transaction/success")
-        .set("access_token", usersData[0].access_token)
+        .post("/transaction/handler")
+        .send({
+          ...mockNotification,
+          order_id: transactionsData[1].orderId,
+        })
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(400);
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("message");
-          expect(res.body.message).to.contain("transactionId is required");
+          expect(res.body.message).to.equal("Transaction's status is done");
           done();
         });
     });
   });
 
   describe("failed case, with 401 status code", () => {
-    it("should return error when acces_token is null", (done) => {
+    it("should return error when response not comply the format", (done) => {
       Chai.request(app)
-        .post("/transaction/success")
-        .send({ transactionId: transactionsData[0].transactionId })
+        .post("/transaction/handler")
+        .send({
+          orderId: "qwerty123646",
+        })
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(401);
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("message");
-          expect(res.body.message).to.equal("Please login first");
-          done();
-        });
-    });
-
-    it("should return error when access by another user", (done) => {
-      Chai.request(app)
-        .post("/transaction/success")
-        .set("access_token", usersData[1].access_token)
-        .send({ transactionId: transactionsData[1].transactionId })
-        .end((err, res) => {
-          expect(err).to.be.null;
-          expect(res).to.have.status(401);
-          expect(res.body).to.be.an("object");
-          expect(res.body).to.have.property("message");
-          expect(res.body.message).to.equal("Unauthorize user");
+          expect(res.body.message).to.equal("Unauthorize response");
           done();
         });
     });
   });
 
   describe("failed case, with 404 status code", () => {
-    it(`should return error when transactionId is wrong`, function (done) {
+    it("should return error when orderId not found", (done) => {
       Chai.request(app)
-        .post("/transaction/success")
-        .set("access_token", usersData[0].access_token)
-        .send({ transactionId: "qwerty123456" })
+        .post("/transaction/handler")
+        .send({
+          ...mockNotification,
+          order_id: "qwerty123456",
+        })
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(404);
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("message");
-          expect(res.body.message).to.contain("Transaction is not found");
+          expect(res.body.message).to.equal("Transaction is not found");
           done();
         });
     });

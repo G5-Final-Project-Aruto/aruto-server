@@ -9,6 +9,7 @@ module.exports = (err, req, res, next) => {
     case "Image is required":
     case "Uploaded file must be image":
     case "transactionId is required":
+    case "Transaction's status is done":
       error = {
         ...error,
         status: 400,
@@ -33,6 +34,7 @@ module.exports = (err, req, res, next) => {
     case "Please login first":
     case "Unauthorize user":
     case "Invalid token":
+    case "Unauthorize response":
       error = {
         ...error,
         status: 401,

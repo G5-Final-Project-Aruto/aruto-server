@@ -13,63 +13,68 @@ class TransactionController {
   static async transactionCreate(req, res, next) {
     try {
       const { arts, gross_amount, address } = req.body;
+      const orderId = uuidv4();
+
       const newTransaction = {
         arts,
         gross_amount,
         address,
         UserId: req.currentUser._id,
         status: "pending",
+        orderId,
       };
 
-      const transaction = await Transaction.create(newTransaction);
+      await Transaction.create(newTransaction);
 
-      const transactionToken = await snap.createTransactionToken({
+      const transactionUrl = await snap.createTransactionRedirectUrl({
         transaction_details: {
-          order_id: uuidv4(),
+          order_id: orderId,
           gross_amount,
         },
         enabled_payments: ["credit_card"],
       });
 
-      res.status(201).json({
-        transactionToken,
-        clientKey: snap.apiConfig.clientKey,
-        transactionId: transaction._id,
-      });
+      res.status(201).json({ transactionUrl });
     } catch (err) {
       next(err);
     }
   }
 
-  static async transactionSuccess(req, res, next) {
+  static async notificationHandler(req, res, next) {
     try {
-      if (!req.body.transactionId) {
-        throw { name: "transactionId is required" };
-      }
-      const { transactionId } = req.body;
+      const { order_id, transaction_status, fraud_status } = req.body;
 
-      const transaction = await Transaction.findOne({ _id: transactionId });
+      if (!order_id || !transaction_status || !fraud_status) {
+        throw { name: "Unauthorize response" };
+      }
+
+      const transaction = await Transaction.findOne({ orderId: order_id });
 
       if (!transaction) {
         throw { name: "Transaction is not found" };
       }
 
-      if (`${transaction.UserId}` !== `${req.currentUser._id}`) {
-        throw { name: "Unauthorize user" };
+      if (transaction.status !== "pending") {
+        throw { name: "Transaction's status is done" };
       }
 
-      await Transaction.updateOne(
-        {
-          _id: transactionId,
-        },
-        {
-          $set: {
-            status: "success",
-          },
-        }
-      );
+      let status = "pending";
+      if (
+        (transaction_status === "capture" && fraud_status === "accept") ||
+        transaction_status === "settlement"
+      ) {
+        transaction.status = "success";
+        status = "success";
+      }
 
-      res.status(200).json({ message: "Payment succesfully" });
+      if (transaction_status === "cancel" || transaction_status === "expire") {
+        transaction.status = "failed";
+        status = "failed";
+      }
+
+      await transaction.save();
+
+      res.status(200).json({ message: `Transaction is ${status}` });
     } catch (err) {
       next(err);
     }
@@ -77,7 +82,10 @@ class TransactionController {
 
   static async transactionHistory(req, res, next) {
     try {
-      const history = await Transaction.find({ UserId: req.currentUser._id });
+      const history = await Transaction.find({
+        UserId: req.currentUser._id,
+      });
+      history.sort((a, b) => b.createdAt.valueOf() - a.createdAt.valueOf());
 
       res.status(200).json(history);
     } catch (err) {
