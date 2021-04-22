@@ -95,7 +95,7 @@ describe("Post /transaction", () => {
           expect(err).to.be.null;
           expect(res).to.have.status(201);
           expect(res.body).to.be.an("object");
-          expect(res.body).to.have.property("transactionUrl");
+          expect(res.body).to.have.property("transactionToken");
           done();
         });
     });
