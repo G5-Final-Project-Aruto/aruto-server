@@ -50,6 +50,14 @@ const transactionSchema = Schema({
     type: ObjectId,
     ref: "User",
   },
+  orderId: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 module.exports = model("Transaction", transactionSchema);
