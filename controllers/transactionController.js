@@ -50,6 +50,8 @@ class TransactionController {
 
       const transaction = await Transaction.findOne({ orderId: order_id });
 
+      // check signatureKey hashing
+
       if (!transaction) {
         throw { name: "Transaction is not found" };
       }
